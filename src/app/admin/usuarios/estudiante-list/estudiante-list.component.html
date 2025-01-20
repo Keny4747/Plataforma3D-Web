@@ -1,0 +1,17 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">Nombre</th>
+      <th scope="col">Last</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr *ngFor="let estudiante of estudiantes">
+      <td> {{ estudiante.nombre }}</td>
+      <td>{{ estudiante.apellido }}</td>
+    </tr>
+  </tbody>
+</table>
