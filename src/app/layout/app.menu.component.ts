@@ -20,6 +20,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Usuario', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
             },
+
             //sidebar del docente
             {
                 label: 'Menu principal',
@@ -32,7 +33,7 @@ export class AppMenuComponent implements OnInit {
                           {
                               label: 'Estudiantes',
                               icon: 'pi pi-fw pi-users',
-                              routerLink: ['/auth/login']
+                              routerLink: ['/admin/estudiantes']
                           },
                           {
                               label: 'Subir Contenido Adicional',
@@ -46,6 +47,8 @@ export class AppMenuComponent implements OnInit {
                   { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/uikit/formlayout'] }
                 ]
             }
+
+            //sidebar del estudiante
 
 
         ];
