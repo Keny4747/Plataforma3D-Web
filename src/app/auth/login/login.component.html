@@ -34,17 +34,32 @@
 
 
 								</div>
-							<form action="#" class="signin-form">
+							<form action="#" class="signin-form" (ngSubmit)="onSubmit()">
 								<div class="form-group mb-3">
-									<label class="label" for="name">Usuario</label>
-									<input type="text" class="form-control" placeholder="Nombre usuario" required>
+									<label class="label" for="username">Usuario</label>
+									<input
+                  type="text"
+                  id="username"
+                  [(ngModel)]="username"
+                  class="form-control"
+                  placeholder="Nombre usuario"
+                  name="username"
+                   required>
 								</div>
 								<div class="form-group mb-3">
 									<label class="label" for="password">Clave</label>
-									<input type="password" class="form-control" placeholder="Constraseña" required>
+									<input
+                  type="password"
+                  id="password"
+                  [(ngModel)]="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Constraseña"
+                  required>
 								</div>
 								<div class="form-group">
 									<button type="submit" class="form-control btn btn-primary submit px-3">Iniciar Sesión</button>
+                  <p *ngIf="error" class="error">{{error}}</p>
 								</div>
 								<div class="form-group d-md-flex">
 
