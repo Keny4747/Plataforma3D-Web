@@ -1,7 +1,9 @@
 export interface Estudiante {
+  id?: string;
   nombre: string;
   apellido: string;
   email: string;
+  username: string;
   password: string;
   telefono: string;
   dni: string;
