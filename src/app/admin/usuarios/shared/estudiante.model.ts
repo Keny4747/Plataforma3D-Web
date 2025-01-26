@@ -7,6 +7,7 @@ export interface Estudiante {
   password: string;
   telefono: string;
   dni: string;
+  role: string;
 
 }
 

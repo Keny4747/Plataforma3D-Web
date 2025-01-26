@@ -11,6 +11,7 @@ import { EstudianteNewComponent } from './usuarios/estudiante-new/estudiante-new
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { DocenteEditComponent } from './usuarios/docente-edit/docente-edit.component';
 import { EstudianteEditComponent } from './usuarios/estudiante-edit/estudiante-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -27,7 +28,8 @@ import { EstudianteEditComponent } from './usuarios/estudiante-edit/estudiante-e
     CommonModule,
     AdminRoutingModule,
     AppLayoutModule,
-    PrimeModule
+    PrimeModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
