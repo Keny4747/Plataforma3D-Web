@@ -128,9 +128,15 @@ editProduct(product: Estudiante) {
     this.productDialog = true;
 }
 
-deleteProduct(product: Estudiante) {
+deleteUsuario(estudiante: Estudiante) {
     this.deleteProductDialog = true;
-    this.estudiante = { ...product };
+    this.estudiante = { ...estudiante };
+
+    if (estudiante.id !== undefined) {
+      this.usuarioService.deleteEstudiante(estudiante.id).subscribe(() => {
+        this.getEstudiantes();
+      });
+    }
 }
 
 confirmDeleteSelected() {
@@ -227,18 +233,6 @@ createPassword(): void {
 
 }
 
-
-findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.estudiantes.length; i++) {
-        if (this.estudiantes[i].id === id) {
-            index = i;
-            break;
-        }
-    }
-
-    return index;
-}
 
 createId(): string {
     let id = '';

@@ -91,7 +91,7 @@
                       <td>
                           <div class="flex">
                               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(estudiante)"></button>
-                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(estudiante)"></button>
+                              <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUsuario(estudiante)"></button>
                           </div>
                       </td>
                   </tr>
@@ -176,7 +176,7 @@
       <p-dialog [(visible)]="deleteProductDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
           <div class="flex align-items-center justify-content-center">
               <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-              <span *ngIf="estudiante">Are you sure you want to delete <b>{{estudiante.nombre}}</b>?</span>
+              <span *ngIf="estudiante">Estás seguro de eliminar a <b>{{estudiante.nombre}} {{estudiante.apellido}}</b>?</span>
           </div>
           <ng-template pTemplate="footer">
               <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
