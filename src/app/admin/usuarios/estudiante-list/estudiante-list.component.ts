@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Estudiante } from '../shared/estudiante.model';
 import { UsuariosService } from '../shared/usuarios.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //prime ng
 import { Table } from 'primeng/table';
 import { MessageService } from 'primeng/api';
@@ -30,20 +31,48 @@ export class EstudianteListComponent implements OnInit {
     username: '',
     password: '',
     telefono: '',
-    dni: ''
-    // Add other required properties here
+    dni: '',
+    role: ''
   };
 
   selectedProducts: Estudiante[] = [];
 
   submitted: boolean = false;
 
-
   rowsPerPageOptions = [5, 10, 20];
-  constructor(private usuarioService: UsuariosService, private messageService: MessageService  ) { }
+
+  //form group
+
+  form: FormGroup;
+
+
+  constructor(private usuarioService: UsuariosService, private messageService: MessageService,
+    private fb: FormBuilder
+   ) {
+
+    this.form = this.fb.group({
+      nombre: [,[Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+      apellido: [,[Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      email: [, [Validators.required, Validators.email]],
+      username: [, [Validators.required]],
+      password: [, [Validators.required]],
+      telefono: [, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      dni: [, [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('^[0-9]*$')]],
+      role: ['USER', [Validators.required]],
+
+    });
+
+    }
 
   ngOnInit(): void {
     this.getEstudiantes();
+
+
+    // Escuchar cambios en los campos para generar el username en tiempo real
+    this.form.get('nombre')?.valueChanges.subscribe(() => this.createUsername());
+    this.form.get('apellido')?.valueChanges.subscribe(() => this.createUsername());
+    this.form.get('dni')?.valueChanges.subscribe(() => this.createUsername());
+
 
   }
 
@@ -72,7 +101,8 @@ openNew() {
     username: '',
     password: '',
     telefono: '',
-    dni: ''
+    dni: '',
+    role: 'USER'
   };
     this.submitted = false;
     this.productDialog = true;
@@ -110,6 +140,7 @@ confirmDelete() {
       username: '',
       password: '',
       telefono: '',
+      role: '',
       dni: ''
     };
 }
@@ -119,36 +150,72 @@ hideDialog() {
     this.submitted = false;
 }
 
-saveProduct() {
-    this.submitted = true;
 
-    if (this.estudiante.nombre?.trim()) {
-        if (this.estudiante.id) {
-            // @ts-ignore
-            this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-            this.estudiantes[this.findIndexById(this.estudiante.id)] = this.estudiante;
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-        } else {
-            this.estudiante.id = this.createId();
+saveEstudiante() {
 
-            // @ts-ignore
-            this.estudiantes.push(this.estudiante);
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-        }
+  this.submitted = true;
+  this.createPassword();
+  if (this.form.invalid) {
+    console.log('Formulario inválido');
+    Object.keys(this.form.controls).forEach((key) => {
+      const control = this.form.get(key);
+      if (control?.invalid) {
+        console.log(`Campo ${key} es inválido:`, control.errors); // Imprime los errores de cada campo
+      }
+    });
+    this.form.markAllAsTouched();
+    return;
+  }
 
-        this.estudiantes = [...this.estudiantes];
+  if (this.estudiante.id) {
+    // Lógica para actualizar el estudiante (si es necesario)
+    // this.usuarioService.updateEstudiante(this.estudiante.id, this.form.value).subscribe({
+    //   next: (data) => {
+    //     const index = this.findIndexById(this.estudiante.id);
+    //     this.estudiantes1[index] = data;
+    //     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Actualizado', life: 3000 });
+    //     this.productDialog = false;
+    //     this.form.reset();
+    //   },
+    //   error: (err) => {
+    //     console.error('Error al actualizar estudiante:', err);
+    //   },
+    // });
+  } else {
+    // Lógica para crear un nuevo estudiante
+
+    this.createUsername();
+    this.usuarioService.createEstudiante(this.form.value).subscribe({
+      next: (data) => {
+        this.estudiantes1.push(data); // Agregar a estudiantes1
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Creado', life: 3000 });
         this.productDialog = false;
-        this.estudiante = {
-          nombre: '',
-          apellido: '',
-          email: '',
-          username: '',
-          password: '',
-          telefono: '',
-          dni: ''
-        };
-    }
+        this.form.reset(); // Restablecer el formulario
+      },
+      error: (err) => {
+        console.error('Error al crear estudiante:', err);
+      },
+    });
+  }
 }
+createUsername(): void {
+  const nombre = this.form.get('nombre')?.value?.trim().substring(0, 2)?.toLowerCase() || '';
+  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 3)?.toLowerCase() || '';
+  const dni = this.form.get('dni')?.value?.trim().substring(0, 2) || '';
+
+  const username = nombre + apellido + dni;
+  this.form.get('username')?.setValue(username, { emitEvent: false });
+  console.log('Username generado:', username);
+}
+createPassword(): void {
+  const nombre = this.form.get('nombre')?.value?.trim().substring(0, 2)?.toLowerCase() || '';
+  const dni = this.form.get('dni')?.value?.trim() || '';
+
+  const password = nombre + dni;
+  this.form.get('password')?.setValue(password, { emitEvent: false });
+  console.log('Password generado:', password); // Verifica que se imprima en la consola
+}
+
 
 findIndexById(id: string): number {
     let index = -1;
@@ -174,6 +241,8 @@ createId(): string {
 onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 }
+
+
 
 
 }
