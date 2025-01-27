@@ -16,8 +16,24 @@ export class UsuariosService {
     return this.http.get<Estudiante[]>(`${environment.apiBase}/estudiante/list`);
   }
 
-  //metodo para crear un estudiante
+
   createEstudiante(estudiante: Estudiante): Observable<Estudiante> {
     return this.http.post<Estudiante>(`${environment.apiBase}/estudiante/new`, estudiante);
+  }
+
+
+  getEstudianteById(id: number): Observable<Estudiante> {
+    return this.http.get<Estudiante>(`${environment.apiBase}/estudiante/${id}`);
+  }
+
+
+  updateEstudiante(id:number,estudiante: Estudiante): Observable<Estudiante> {
+
+    return this.http.put<Estudiante>(`${environment.apiBase}/estudiante/${id}`, estudiante);
+  }
+
+
+  deleteEstudiante(id: number): Observable<Estudiante> {
+    return this.http.delete<Estudiante>(`${environment.apiBase}/estudiante/${id}`);
   }
 }

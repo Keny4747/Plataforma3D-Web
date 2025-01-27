@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //prime ng
 import { Table } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estudiante-list',
@@ -46,8 +47,11 @@ export class EstudianteListComponent implements OnInit {
   form: FormGroup;
 
 
-  constructor(private usuarioService: UsuariosService, private messageService: MessageService,
-    private fb: FormBuilder
+  constructor(
+    private usuarioService: UsuariosService,
+    private messageService: MessageService,
+    private fb: FormBuilder,
+    private router: Router
    ) {
 
     this.form = this.fb.group({
@@ -68,11 +72,18 @@ export class EstudianteListComponent implements OnInit {
     this.getEstudiantes();
 
 
-    // Escuchar cambios en los campos para generar el username en tiempo real
-    this.form.get('nombre')?.valueChanges.subscribe(() => this.createUsername());
-    this.form.get('apellido')?.valueChanges.subscribe(() => this.createUsername());
-    this.form.get('dni')?.valueChanges.subscribe(() => this.createUsername());
 
+    this.form.get('nombre')?.valueChanges.subscribe(() => {
+      this.createUsername();
+      this.createPassword();
+    });
+
+    this.form.get('apellido')?.valueChanges.subscribe(() => this.createUsername());
+
+    this.form.get('dni')?.valueChanges.subscribe(() => {
+      this.createUsername();
+      this.createPassword();
+    });
 
   }
 
@@ -112,14 +123,21 @@ deleteSelectedProducts() {
     this.deleteProductsDialog = true;
 }
 
-editProduct(product: Estudiante) {
-    this.estudiante = { ...product };
+editProduct(estudiante: Estudiante) {
+    this.estudiante = { ...estudiante };
+    this.form.patchValue(this.estudiante);
     this.productDialog = true;
 }
 
-deleteProduct(product: Estudiante) {
+deleteUsuario(estudiante: Estudiante) {
     this.deleteProductDialog = true;
-    this.estudiante = { ...product };
+    this.estudiante = { ...estudiante };
+
+    if (estudiante.id !== undefined) {
+      this.usuarioService.deleteEstudiante(estudiante.id).subscribe(() => {
+        this.getEstudiantes();
+      });
+    }
 }
 
 confirmDeleteSelected() {
@@ -152,15 +170,14 @@ hideDialog() {
 
 
 saveEstudiante() {
-
   this.submitted = true;
-  this.createPassword();
+
   if (this.form.invalid) {
     console.log('Formulario inválido');
     Object.keys(this.form.controls).forEach((key) => {
       const control = this.form.get(key);
       if (control?.invalid) {
-        console.log(`Campo ${key} es inválido:`, control.errors); // Imprime los errores de cada campo
+        console.log(`Campo ${key} es inválido:`, control.errors);
       }
     });
     this.form.markAllAsTouched();
@@ -168,29 +185,29 @@ saveEstudiante() {
   }
 
   if (this.estudiante.id) {
-    // Lógica para actualizar el estudiante (si es necesario)
-    // this.usuarioService.updateEstudiante(this.estudiante.id, this.form.value).subscribe({
-    //   next: (data) => {
-    //     const index = this.findIndexById(this.estudiante.id);
-    //     this.estudiantes1[index] = data;
-    //     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Actualizado', life: 3000 });
-    //     this.productDialog = false;
-    //     this.form.reset();
-    //   },
-    //   error: (err) => {
-    //     console.error('Error al actualizar estudiante:', err);
-    //   },
-    // });
+    // Lógica para actualizar un estudiante existente
+    this.usuarioService.updateEstudiante(this.estudiante.id, this.form.value).subscribe({
+      next: (data) => {
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Datos del estudiante actualizados correctamente', life: 3000 });
+        this.productDialog = false;
+        this.form.reset();
+        this.getEstudiantes();
+      },
+      error: (err) => {
+        console.error('Error al actualizar estudiante:', err);
+      },
+    });
   } else {
     // Lógica para crear un nuevo estudiante
-
     this.createUsername();
+    this.createPassword();
     this.usuarioService.createEstudiante(this.form.value).subscribe({
       next: (data) => {
-        this.estudiantes1.push(data); // Agregar a estudiantes1
+        this.estudiantes1.push(data);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Creado', life: 3000 });
         this.productDialog = false;
-        this.form.reset(); // Restablecer el formulario
+        this.form.reset();
+        this.router.navigate(['/estudiantes']);
       },
       error: (err) => {
         console.error('Error al crear estudiante:', err);
@@ -199,13 +216,12 @@ saveEstudiante() {
   }
 }
 createUsername(): void {
-  const nombre = this.form.get('nombre')?.value?.trim().substring(0, 2)?.toLowerCase() || '';
-  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 3)?.toLowerCase() || '';
+  const nombre = this.form.get('nombre')?.value?.trim().substring(0)?.toLowerCase() || '';
+  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 5)?.toLowerCase() || '';
   const dni = this.form.get('dni')?.value?.trim().substring(0, 2) || '';
-
   const username = nombre + apellido + dni;
   this.form.get('username')?.setValue(username, { emitEvent: false });
-  console.log('Username generado:', username);
+
 }
 createPassword(): void {
   const nombre = this.form.get('nombre')?.value?.trim().substring(0, 2)?.toLowerCase() || '';
@@ -213,21 +229,9 @@ createPassword(): void {
 
   const password = nombre + dni;
   this.form.get('password')?.setValue(password, { emitEvent: false });
-  console.log('Password generado:', password); // Verifica que se imprima en la consola
+
 }
 
-
-findIndexById(id: string): number {
-    let index = -1;
-    for (let i = 0; i < this.estudiantes.length; i++) {
-        if (this.estudiantes[i].id === id) {
-            index = i;
-            break;
-        }
-    }
-
-    return index;
-}
 
 createId(): string {
     let id = '';
