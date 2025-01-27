@@ -28,6 +28,7 @@ export class UsuariosService {
 
 
   updateEstudiante(id:number,estudiante: Estudiante): Observable<Estudiante> {
+
     return this.http.put<Estudiante>(`${environment.apiBase}/estudiante/${id}`, estudiante);
   }
 

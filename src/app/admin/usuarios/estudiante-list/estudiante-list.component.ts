@@ -123,8 +123,9 @@ deleteSelectedProducts() {
     this.deleteProductsDialog = true;
 }
 
-editProduct(product: Estudiante) {
-    this.estudiante = { ...product };
+editProduct(estudiante: Estudiante) {
+    this.estudiante = { ...estudiante };
+    this.form.patchValue(this.estudiante);
     this.productDialog = true;
 }
 
@@ -169,15 +170,14 @@ hideDialog() {
 
 
 saveEstudiante() {
-
   this.submitted = true;
-  this.createPassword();
+
   if (this.form.invalid) {
     console.log('Formulario inválido');
     Object.keys(this.form.controls).forEach((key) => {
       const control = this.form.get(key);
       if (control?.invalid) {
-        console.log(`Campo ${key} es inválido:`, control.errors); // Imprime los errores de cada campo
+        console.log(`Campo ${key} es inválido:`, control.errors);
       }
     });
     this.form.markAllAsTouched();
@@ -185,29 +185,28 @@ saveEstudiante() {
   }
 
   if (this.estudiante.id) {
-    // Lógica para actualizar el estudiante (si es necesario)
-    // this.usuarioService.updateEstudiante(this.estudiante.id, this.form.value).subscribe({
-    //   next: (data) => {
-    //     const index = this.findIndexById(this.estudiante.id);
-    //     this.estudiantes1[index] = data;
-    //     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Actualizado', life: 3000 });
-    //     this.productDialog = false;
-    //     this.form.reset();
-    //   },
-    //   error: (err) => {
-    //     console.error('Error al actualizar estudiante:', err);
-    //   },
-    // });
+    // Lógica para actualizar un estudiante existente
+    this.usuarioService.updateEstudiante(this.estudiante.id, this.form.value).subscribe({
+      next: (data) => {
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Datos del estudiante actualizados correctamente', life: 3000 });
+        this.productDialog = false;
+        this.form.reset();
+        this.getEstudiantes();
+      },
+      error: (err) => {
+        console.error('Error al actualizar estudiante:', err);
+      },
+    });
   } else {
     // Lógica para crear un nuevo estudiante
-
     this.createUsername();
+    this.createPassword();
     this.usuarioService.createEstudiante(this.form.value).subscribe({
       next: (data) => {
-        this.estudiantes1.push(data); // Agregar a estudiantes1
+        this.estudiantes1.push(data);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Creado', life: 3000 });
         this.productDialog = false;
-        this.form.reset(); // Restablecer el formulario
+        this.form.reset();
         this.router.navigate(['/estudiantes']);
       },
       error: (err) => {
@@ -217,8 +216,8 @@ saveEstudiante() {
   }
 }
 createUsername(): void {
-  const nombre = this.form.get('nombre')?.value?.trim().substring(0, 2)?.toLowerCase() || '';
-  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 3)?.toLowerCase() || '';
+  const nombre = this.form.get('nombre')?.value?.trim().substring(0)?.toLowerCase() || '';
+  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 5)?.toLowerCase() || '';
   const dni = this.form.get('dni')?.value?.trim().substring(0, 2) || '';
   const username = nombre + apellido + dni;
   this.form.get('username')?.setValue(username, { emitEvent: false });
