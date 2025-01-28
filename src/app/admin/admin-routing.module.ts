@@ -4,6 +4,7 @@ import { DocenteNewComponent } from './usuarios/docente-new/docente-new.componen
 import { EstudianteListComponent } from './usuarios/estudiante-list/estudiante-list.component';
 import { AppLayoutComponent } from '../layout/app.layout.component';
 import { CargarContenidoAdicionalComponent } from './contenido-adicional/cargar-contenido-adicional/cargar-contenido-adicional.component';
+import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-contenido-adicional/listar-contenido-adicional.component';
 
 const routes: Routes = [
 
@@ -16,11 +17,14 @@ const routes: Routes = [
         component: EstudianteListComponent
       },
       {
+        path: 'listar-contenido-adicional',
+        component: ListarContenidoAdicionalComponent
+      },
+      {
         path: 'cargar-contenido-adicional',
         component: CargarContenidoAdicionalComponent
 
       },
-
       {
         path:'docente',
         component:DocenteNewComponent

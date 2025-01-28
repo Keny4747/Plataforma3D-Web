@@ -36,15 +36,26 @@ export class AppMenuComponent implements OnInit {
                               routerLink: ['/estudiantes']
                           },
                           {
-                              label: 'Subir Contenido Adicional',
-                              icon: 'pi pi-fw pi-file-plus',
-                              routerLink: ['/cargar-contenido-adicional']
+                                    label: 'Contenido Adicional', icon: 'pi pi-fw pi-bookmark',
+                                    items: [
+                                        {
+                                          label: 'Subir Contenido Adicional',
+                                          icon: 'pi pi-fw pi-plus',
+                                          routerLink: ['/cargar-contenido-adicional']
+                                        },
+                                        {
+                                          label: 'Administrar Contenido Adicional',
+                                          icon: 'pi pi-fw pi-list-check',
+                                          routerLink: ['/listar-contenido-adicional']
+                                        }
+
+                                    ]
                           }
                       ]
                   },
                   { label: 'Reporte Estudiante', icon: 'pi pi-fw pi-file-pdf', routerLink: ['/uikit/formlayout'] },
                   { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/uikit/formlayout'] },
-                  { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/uikit/formlayout'] }
+                  { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/listar-contenido-adicional'] }
                 ]
             }
 

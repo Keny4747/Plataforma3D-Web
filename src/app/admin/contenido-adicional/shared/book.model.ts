@@ -2,7 +2,7 @@ export interface Book {
   id?: number;
   title: string;
   description: string;
-  coverpath: string;
+  coverPath: string;
   filepath: string;
 
 }
