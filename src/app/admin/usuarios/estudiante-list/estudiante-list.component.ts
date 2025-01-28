@@ -216,8 +216,8 @@ saveEstudiante() {
   }
 }
 createUsername(): void {
-  const nombre = this.form.get('nombre')?.value?.trim().substring(0)?.toLowerCase() || '';
-  const apellido = this.form.get('apellido')?.value?.trim().substring(0, 5)?.toLowerCase() || '';
+  const nombre = this.form.get('nombre')?.value?.trim().substring(0,1)?.toLowerCase() || '';
+  const apellido = this.form.get('apellido')?.value?.trim().substring(0,5)?.toLowerCase() || '';
   const dni = this.form.get('dni')?.value?.trim().substring(0, 2) || '';
   const username = nombre + apellido + dni;
   this.form.get('username')?.setValue(username, { emitEvent: false });
@@ -245,8 +245,5 @@ createId(): string {
 onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
 }
-
-
-
 
 }
