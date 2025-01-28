@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DocenteNewComponent } from './usuarios/docente-new/docente-new.component';
 import { EstudianteListComponent } from './usuarios/estudiante-list/estudiante-list.component';
-import { EstudianteNewComponent } from './usuarios/estudiante-new/estudiante-new.component';
 import { AppLayoutComponent } from '../layout/app.layout.component';
+import { CargarContenidoAdicionalComponent } from './contenido-adicional/cargar-contenido-adicional/cargar-contenido-adicional.component';
 
 const routes: Routes = [
 
@@ -16,9 +16,11 @@ const routes: Routes = [
         component: EstudianteListComponent
       },
       {
-        path: 'estudiante/new',
-        component: EstudianteNewComponent
+        path: 'cargar-contenido-adicional',
+        component: CargarContenidoAdicionalComponent
+
       },
+
       {
         path:'docente',
         component:DocenteNewComponent

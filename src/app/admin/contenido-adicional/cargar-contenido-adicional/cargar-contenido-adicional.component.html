@@ -1,0 +1,50 @@
+<div class="grid p-fluid">
+	<div class="col-12 md:col-6">
+		<div class="card">
+
+
+			<h5>Titulo</h5>
+			<span class="p-float-label">
+				<input id="float-input" type="text" pInputText>
+				<label for="float-input">Nombre del archivo</label>
+			</span>
+
+			<h5>Descripción</h5>
+      <span class="p-float-label">
+        <textarea rows="5" cols="30" pInputTextarea></textarea>
+        <label for="float-input">Descripcion del archivo</label>
+      </span>
+
+      <h5>Portada</h5>
+
+      <div class="grid formgrid">
+
+
+        <p-fileUpload
+        mode="basic"
+        chooseLabel="Seleccionar..."
+        chooseIcon="pi pi-upload"
+        name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*"
+
+        (onUpload)="onUpload()" />
+      </div>
+
+
+
+      <h5>Archivo</h5>
+      <div class="grid formgrid">
+        <p-fileUpload
+        mode="basic"
+        chooseLabel="Seleccionar..."
+        chooseIcon="pi pi-upload"
+        name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*"
+
+        (onUpload)="onUpload()" />
+      </div>
+		</div>
+	</div>
+</div>

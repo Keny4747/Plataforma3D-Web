@@ -33,12 +33,12 @@ export class AppMenuComponent implements OnInit {
                           {
                               label: 'Estudiantes',
                               icon: 'pi pi-fw pi-users',
-                              routerLink: ['/admin/estudiantes']
+                              routerLink: ['/estudiantes']
                           },
                           {
                               label: 'Subir Contenido Adicional',
                               icon: 'pi pi-fw pi-file-plus',
-                              routerLink: ['/auth/error']
+                              routerLink: ['/cargar-contenido-adicional']
                           }
                       ]
                   },
