@@ -26,7 +26,7 @@ export class ListarContenidoAdicionalComponent {
     title: '',
     description: '',
     coverPath: '',
-    filepath: '',
+    filePath: '',
   };
 
 
