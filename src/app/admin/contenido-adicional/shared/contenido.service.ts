@@ -22,10 +22,10 @@ export class ContenidoService {
   create(book:Book):Observable<Book>{
     return this.http.post<Book>(`${environment.apiBase}/api/books`,book);
   }
-
-  update(book:Book):Observable<Book>{
-    return this.http.put<Book>(`${environment.apiBase}/api/books/${book.id}`,book);
+  update(book: Book): Observable<Book> {
+    return this.http.put<Book>(`${environment.apiBase}/api/books/${book.id}`, book);
   }
+
 
   delete(id:number):Observable<any>{
     return this.http.delete(`${environment.apiBase}/api/books/${id}`);

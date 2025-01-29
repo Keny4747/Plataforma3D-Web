@@ -73,10 +73,7 @@ deleteSelectedProducts() {
     this.deleteProductsDialog = true;
 }
 
-editProduct(book: Book) {
 
-    this.productDialog = true;
-}
 
 deleteLibro(libro: Book) {
     this.deleteProductDialog = true;

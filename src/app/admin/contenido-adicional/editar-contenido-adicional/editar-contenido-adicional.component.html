@@ -2,10 +2,11 @@
   <div class="col-12 md:col-6">
     <div class="card">
       <div class="w-100 text-center">
-        <h3 class="mb-4">Editar Registro</h3>
+        <h3 class="mb-4">Editar Libro</h3>
         <hr style="border-top: 6px solid rgb(226, 89, 9); width: 100%;">
       </div>
-      <form [formGroup]="bookForm" (ngSubmit)="onUpload()">
+
+      <form [formGroup]="bookForm" (ngSubmit)="onSave()">
         <h5>Título</h5>
         <span class="p-float-label">
           <input id="title" type="text" pInputText formControlName="title">
@@ -64,11 +65,25 @@
               label="Guardar"
               class="p-button-success"
               type="submit"
-              [disabled]="bookForm.invalid || !coverFile || !contentFile">
+              [disabled]="bookForm.invalid">
             </button>
           </div>
         </div>
       </form>
     </div>
   </div>
+
+  <!-- Vista previa de la portada -->
+  <div class="col-6">
+    <div class="card">
+      <h5>Vista previa de la portada</h5>
+      <div *ngIf="coverImageUrl">
+        <img [src]="coverImageUrl" alt="Portada seleccionada" style="max-width: 100%; height: auto; border-radius: 8px;">
+      </div>
+      <div *ngIf="!coverImageUrl">
+        <p>No se ha seleccionado ninguna portada.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
