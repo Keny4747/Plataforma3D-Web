@@ -30,4 +30,20 @@ export class ContenidoService {
   delete(id:number):Observable<any>{
     return this.http.delete(`${environment.apiBase}/api/books/${id}`);
   }
+
+
+
+  //endpoints para subir archivos
+  uploadFiles(files: File[]): Observable<any> {
+    const formData = new FormData();
+    files.forEach((file, index) => {
+      formData.append('files', file);
+    });
+
+    return this.http.post(`${environment.apiBase}/api/media/upload`, formData);
+  }
+
+  downloadFile(filename: string): Observable<Blob> {
+    return this.http.get(`${environment.apiBase}/api/media/${filename}`, { responseType: 'blob' });
+  }
 }

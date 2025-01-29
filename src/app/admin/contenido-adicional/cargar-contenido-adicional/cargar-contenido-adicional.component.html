@@ -1,75 +1,70 @@
 <div class="grid p-fluid">
-	<div class="col-12 md:col-6">
-		<div class="card">
+  <div class="col-12 md:col-6">
+    <div class="card">
+      <form [formGroup]="bookForm" (ngSubmit)="onUpload()">
+        <h5>Título</h5>
+        <span class="p-float-label">
+          <input id="title" type="text" pInputText formControlName="title">
+          <label for="title">Nombre del archivo</label>
+        </span>
 
+        <h5>Descripción</h5>
+        <span class="p-float-label">
+          <textarea id="description" rows="5" cols="30" pInputTextarea formControlName="description"></textarea>
+          <label for="description">Descripción del archivo</label>
+        </span>
 
-			<h5>Titulo</h5>
-			<span class="p-float-label">
-				<input id="float-input" type="text" pInputText>
-				<label for="float-input">Nombre del archivo</label>
-			</span>
+        <h5>Portada</h5>
+        <div class="grid formgrid">
+          <div class="form-group">
+            <label for="coverFile">Seleccionar portada</label>
+            <input
+              type="file"
+              class="form-control"
+              id="coverFile"
+              (change)="onCoverSelect($event)"
+              accept="image/*"
+            />
+          </div>
+        </div>
 
-			<h5>Descripción</h5>
-      <span class="p-float-label">
-        <textarea rows="5" cols="30" pInputTextarea></textarea>
-        <label for="float-input">Descripcion del archivo</label>
-      </span>
+        <h5>Archivo</h5>
+        <div class="grid formgrid">
+          <div class="form-group">
+            <label for="contentFile">Seleccionar archivo</label>
+            <input
+              type="file"
+              class="form-control"
+              id="contentFile"
+              (change)="onContentSelect($event)"
+              accept="application/pdf"
+            />
+          </div>
+        </div>
 
-      <h5>Portada</h5>
-
-      <div class="grid formgrid">
-
-
-        <p-fileUpload
-        mode="basic"
-        chooseLabel="Seleccionar..."
-        chooseIcon="pi pi-upload"
-        name="demo[]"
-        url="https://www.primefaces.org/cdn/api/upload.php"
-        accept="image/*"
-
-        (onUpload)="onUpload()" />
-      </div>
-
-
-
-      <h5>Archivo</h5>
-      <div class="grid formgrid">
-        <p-fileUpload
-        mode="basic"
-        chooseLabel="Seleccionar..."
-        chooseIcon="pi pi-upload"
-        name="demo[]"
-        url="https://www.primefaces.org/cdn/api/upload.php"
-        accept="image/*"
-
-        (onUpload)="onUpload()" />
-      </div>
-
-<hr>
-      <div class="grid formgrid">
-
-        <div class="flex align-items-center justify-content-center  h-4rem  font-bold border-round m-2">
-          <button
+        <hr>
+        <div class="grid formgrid">
+          <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+            <button
               pButton
               pRipple
               label="Cancelar"
-              class="p-button-secondary">
-          </button>
-      </div>
-
-        <div class="flex align-items-center justify-content-center  h-4rem font-bold border-round m-2">
-          <button
+              class="p-button-secondary"
+              routerLink="/listar-contenido-adicional">
+            </button>
+          </div>
+          <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+            <button
               pButton
               pRipple
               label="Guardar"
-              class="p-button-success">
-          </button>
-      </div>
-      </div>
-
-
-
-		</div>
-	</div>
+              class="p-button-success"
+              type="submit"
+              [disabled]="bookForm.invalid || !coverFile || !contentFile">
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
