@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Book } from '../shared/book.model';
 
+
 @Component({
   selector: 'app-cargar-contenido-adicional',
   templateUrl: './cargar-contenido-adicional.component.html',
@@ -17,6 +18,33 @@ export class CargarContenidoAdicionalComponent {
   bookForm: FormGroup;
   coverFile: File | null = null;
   contentFile: File | null = null;
+
+
+  coverImageUrl: string | null = null;
+
+  //coverpath
+
+  images!: any[];
+
+  galleriaResponsiveOptions: any[] = [
+    {
+        breakpoint: '1024px',
+        numVisible: 5
+    },
+    {
+        breakpoint: '960px',
+        numVisible: 4
+    },
+    {
+        breakpoint: '768px',
+        numVisible: 3
+    },
+    {
+        breakpoint: '560px',
+        numVisible: 1
+    }
+];
+
 
   constructor(
     private fb: FormBuilder,
@@ -33,8 +61,24 @@ export class CargarContenidoAdicionalComponent {
   onCoverSelect(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      this.coverFile = file;
-      console.log('Portada seleccionada:', this.coverFile); // Depuración
+
+      if (file.type.startsWith('image/')) {
+        this.coverFile = file;
+
+
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.coverImageUrl = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Por favor, selecciona un archivo de imagen válido.',
+        });
+        event.target.value = '';
+      }
     }
   }
 
@@ -61,13 +105,13 @@ export class CargarContenidoAdicionalComponent {
 
     this.contenidoService.uploadFiles(files).subscribe(
       (response) => {
-        const [coverPath, filepath] = response.filenames;
+        const [coverPath, filePath] = response.filenames;
 
         const book: Book = {
           title: title,
           description: description,
           coverPath: coverPath,
-          filepath: filepath,
+          filePath: filePath,
         };
 
         this.contenidoService.create(book).subscribe(

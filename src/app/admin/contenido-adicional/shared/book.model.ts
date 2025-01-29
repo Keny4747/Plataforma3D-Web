@@ -3,6 +3,6 @@ export interface Book {
   title: string;
   description: string;
   coverPath: string;
-  filepath: string;
+  filePath: string;
 
 }
