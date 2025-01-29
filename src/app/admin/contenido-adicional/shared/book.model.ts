@@ -4,5 +4,5 @@ export interface Book {
   description: string;
   coverPath: string;
   filePath: string| null;
-
+  createdAt?: Date;
 }

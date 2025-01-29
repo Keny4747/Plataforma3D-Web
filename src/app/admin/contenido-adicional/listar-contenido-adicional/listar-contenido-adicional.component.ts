@@ -4,11 +4,13 @@ import { ContenidoService } from '../shared/contenido.service';
 import { Book } from '../shared/book.model';
 import { Table } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { ApiImgPipePipe } from 'src/app/shared/api-img-pipe.pipe';
 
 @Component({
   selector: 'app-listar-contenido-adicional',
   templateUrl: './listar-contenido-adicional.component.html',
-  providers: [MessageService],
+  providers: [MessageService,ApiImgPipePipe],
+
 })
 export class ListarContenidoAdicionalComponent {
 
@@ -43,8 +45,8 @@ export class ListarContenidoAdicionalComponent {
 
   constructor(private messageService:MessageService,
     private contenidoService: ContenidoService,
-
-    private router: Router
+    private router: Router,
+    private apiImgPipePipe: ApiImgPipePipe
    ) {
 
     }

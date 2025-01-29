@@ -4,11 +4,12 @@ import { ContenidoService } from '../shared/contenido.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../shared/book.model';
+import { ApiImgPipePipe } from 'src/app/shared/api-img-pipe.pipe';
 
 @Component({
   selector: 'app-editar-contenido-adicional',
   templateUrl: './editar-contenido-adicional.component.html',
-  providers: [MessageService],
+   providers: [MessageService,ApiImgPipePipe]
 })
 export class EditarContenidoAdicionalComponent implements OnInit {
 
@@ -29,6 +30,7 @@ export class EditarContenidoAdicionalComponent implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      coverPath: ['', Validators.required],
     });
   }
 
@@ -42,6 +44,7 @@ export class EditarContenidoAdicionalComponent implements OnInit {
           this.bookForm.patchValue({
             title: book.title,
             description: book.description,
+            coverPath: book.coverPath,
           });
           this.coverImageUrl = book.coverPath;
         },

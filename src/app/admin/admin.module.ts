@@ -13,6 +13,7 @@ import { CargarContenidoAdicionalComponent } from './contenido-adicional/cargar-
 import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-contenido-adicional/listar-contenido-adicional.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
+import { ApiImgPipePipe } from '../shared/api-img-pipe.pipe';
 
 
 
@@ -25,7 +26,7 @@ import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-
     CargarContenidoAdicionalComponent,
     ListarContenidoAdicionalComponent,
     EditarContenidoAdicionalComponent,
-
+    ApiImgPipePipe
 
   ],
   imports: [
@@ -35,6 +36,7 @@ import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-
     PrimeModule,
     ReactiveFormsModule,
     FileUploadModule
+
   ]
 })
 export class AdminModule { }

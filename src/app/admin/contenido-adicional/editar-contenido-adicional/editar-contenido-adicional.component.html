@@ -80,9 +80,12 @@
       <div *ngIf="coverImageUrl">
         <img [src]="coverImageUrl" alt="Portada seleccionada" style="max-width: 100%; height: auto; border-radius: 8px;">
       </div>
-      <div *ngIf="!coverImageUrl">
-        <p>No se ha seleccionado ninguna portada.</p>
+      <h5>Vista previa de la portada actual:</h5>
+      <div>
+          <img [src]="bookForm.controls['coverPath'].value | apiImgPipe" alt="" class="img-thumbnail">
       </div>
+
+
     </div>
   </div>
 

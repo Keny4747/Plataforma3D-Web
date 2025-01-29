@@ -8,6 +8,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { ApiImgPipePipe } from './shared/api-img-pipe.pipe';
 
 @NgModule({
   declarations: [
