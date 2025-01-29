@@ -14,6 +14,8 @@ export class ListarContenidoAdicionalComponent {
 
   contenido1 : Book[] = [];
 
+  bookToDelete: Book | null = null;
+
   //prime ng
   productDialog: boolean = false;
 
@@ -75,20 +77,41 @@ deleteSelectedProducts() {
 
 
 
-deleteLibro(libro: Book) {
-    this.deleteProductDialog = true;
-    if (libro.id !== undefined) {
-      /*this.contenidoService.deleteEstudiante(estudiante.id).subscribe(() => {
-        this.getEstudiantes();
-      });
-      */
-    }
+deleteLibro(book: Book): void {
+  this.bookToDelete = book; // Guardar el libro seleccionado
+  this.deleteProductDialog = true; // Mostrar el diálogo de confirmación
 }
 
-confirmDelete() {
-    this.deleteProductDialog = false;
-    //this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Libro Eliminado', life: 3000 });
+confirmDelete(): void {
+  if (this.bookToDelete && this.bookToDelete.id !== undefined) {
+    this.contenidoService.delete(this.bookToDelete.id).subscribe({
+      next: () => {
+        // Mostrar mensaje de éxito
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: 'Libro eliminado correctamente',
+          life: 3000,
+        });
 
+        // Recargar la lista de libros
+        this.getLibros();
+      },
+      error: (err) => {
+        // Mostrar mensaje de error
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudo eliminar el libro: ' + err.message,
+          life: 3000,
+        });
+      },
+    });
+  }
+
+  // Cerrar el diálogo de confirmación
+  this.deleteProductDialog = false;
+  this.bookToDelete = null; // Limpiar el libro seleccionado
 }
 
 hideDialog() {
