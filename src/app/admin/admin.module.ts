@@ -7,11 +7,13 @@ import { EstudianteListComponent } from './usuarios/estudiante-list/estudiante-l
 import { AppLayoutModule } from '../layout/app.layout.module';
 
 import { PrimeModule } from '../prime/prime.module';
-import { EstudianteNewComponent } from './usuarios/estudiante-new/estudiante-new.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
-import { DocenteEditComponent } from './usuarios/docente-edit/docente-edit.component';
-import { EstudianteEditComponent } from './usuarios/estudiante-edit/estudiante-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CargarContenidoAdicionalComponent } from './contenido-adicional/cargar-contenido-adicional/cargar-contenido-adicional.component';
+import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-contenido-adicional/listar-contenido-adicional.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
+
 
 
 
@@ -19,17 +21,20 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     DocenteNewComponent,
     EstudianteListComponent,
-    EstudianteNewComponent,
     AdminLayoutComponent,
-    DocenteEditComponent,
-    EstudianteEditComponent
+    CargarContenidoAdicionalComponent,
+    ListarContenidoAdicionalComponent,
+    EditarContenidoAdicionalComponent,
+
+
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     AppLayoutModule,
     PrimeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ]
 })
 export class AdminModule { }
