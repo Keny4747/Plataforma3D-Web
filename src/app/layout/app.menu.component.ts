@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { AuthService } from '../auth/shared/auth.service';
 
 @Component({
     selector: 'app-menu',
@@ -9,11 +10,19 @@ import { LayoutService } from './service/app.layout.service';
 })
 export class AppMenuComponent implements OnInit {
 
+    fullName: string | null = null;
+
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private authService : AuthService) { }
 
     ngOnInit() {
+
+        //Obtenemos el nombre completo del usuario
+        this.fullName = this.authService.getFullName();
+        //imprimir el nombre completo del usuario
+        console.log(this.fullName);
+        //Sidebar del administrador
         this.model = [
             {
                 label: 'Perfil',
@@ -64,5 +73,6 @@ export class AppMenuComponent implements OnInit {
 
 
         ];
+
     }
 }
