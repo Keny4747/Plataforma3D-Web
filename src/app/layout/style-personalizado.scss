@@ -1,0 +1,8 @@
+.circular {
+  width: 100px; /* Tamaño de la imagen */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 5px auto 0; /* 50px desde arriba, centrado horizontalmente */
+}
