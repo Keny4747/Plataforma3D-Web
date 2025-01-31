@@ -130,15 +130,10 @@ editProduct(estudiante: Estudiante) {
 }
 
 deleteUsuario(estudiante: Estudiante) {
-    this.deleteProductDialog = true;
-    this.estudiante = { ...estudiante };
-
-    if (estudiante.id !== undefined) {
-      this.usuarioService.deleteEstudiante(estudiante.id).subscribe(() => {
-        this.getEstudiantes();
-      });
-    }
+  this.deleteProductDialog = true;
+  this.estudiante = { ...estudiante }; // Asignar el estudiante que se desea eliminar
 }
+
 
 confirmDeleteSelected() {
     this.deleteProductsDialog = false;
@@ -148,19 +143,28 @@ confirmDeleteSelected() {
 }
 
 confirmDelete() {
-    this.deleteProductDialog = false;
-    this.estudiantes = this.estudiantes.filter(val => val.id !== this.estudiante.id);
-    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Eliminado', life: 3000 });
-    this.estudiante = {
+  if (this.estudiante.id !== undefined) {
+      this.usuarioService.deleteEstudiante(this.estudiante.id).subscribe({
+          next: () => {
+              this.getEstudiantes(); // Actualizar la lista de estudiantes
+              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Estudiante Eliminado', life: 3000 });
+          },
+          error: (err) => {
+              console.error('Error al eliminar estudiante:', err);
+          }
+      });
+  }
+  this.deleteProductDialog = false; // Cerrar el diálogo de confirmación
+  this.estudiante = {
       nombre: '',
       apellido: '',
       email: '',
       username: '',
       password: '',
       telefono: '',
-      role: '',
-      dni: ''
-    };
+      dni: '',
+      role: ''
+  };
 }
 
 hideDialog() {
