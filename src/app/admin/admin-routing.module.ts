@@ -6,6 +6,7 @@ import { AppLayoutComponent } from '../layout/app.layout.component';
 import { CargarContenidoAdicionalComponent } from './contenido-adicional/cargar-contenido-adicional/cargar-contenido-adicional.component';
 import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-contenido-adicional/listar-contenido-adicional.component';
 import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
+import { ContenidoListarHomeComponent } from '../home/contenido-listar-home/contenido-listar-home.component';
 
 const routes: Routes = [
 
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'editar-contenido-adicional/:id',
         component: EditarContenidoAdicionalComponent
+      },
+      {
+        path: 'home-contenido-adicional',
+        component: ContenidoListarHomeComponent
       },
       {
         path:'docente',

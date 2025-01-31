@@ -16,6 +16,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import {  MessagesModule } from 'primeng/messages';
 import { GalleriaModule } from 'primeng/galleria';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,10 @@ import { GalleriaModule } from 'primeng/galleria';
     InputNumberModule,
     DialogModule,
     MessagesModule,
-    GalleriaModule
+    GalleriaModule,
+    DataViewModule,
+
+
   ]
 })
 export class PrimeModule { }

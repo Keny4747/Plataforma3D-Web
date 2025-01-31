@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Perfil',
                 items: [
-                    { label: 'Usuario', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
+                    { label: 'Usuario', icon: 'pi pi-fw pi-user', routerLink: ['/'] }
                 ]
             },
 
@@ -65,7 +65,7 @@ export class AppMenuComponent implements OnInit {
                   },
                   { label: 'Reporte Estudiante', icon: 'pi pi-fw pi-file-pdf', routerLink: ['/uikit/formlayout'] },
                   { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/uikit/formlayout'] },
-                  { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/listar-contenido-adicional'] }
+                  { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/home-contenido-adicional'] }
                 ]
             }
 

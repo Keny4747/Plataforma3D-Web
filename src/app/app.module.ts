@@ -10,12 +10,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { ApiImgPipePipe } from './shared/api-img-pipe.pipe';
 import { ContenidoListarHomeComponent } from './home/contenido-listar-home/contenido-listar-home.component';
+import { DataViewModule } from 'primeng/dataview';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ContenidoListarHomeComponent
+    LoginComponent
 
   ],
   imports: [
@@ -24,8 +25,8 @@ import { ContenidoListarHomeComponent } from './home/contenido-listar-home/conte
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    AppLayoutModule
-
+    AppLayoutModule,
+    HomeModule
   ],
   providers: [
     {
