@@ -1,21 +1,23 @@
 <div class="grid">
 	<div class="col-12">
 		<div class="card">
-			<h5>DataView</h5>
-			<p-dataView #dv [value]="products" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+			<h5>Lista de contenido adicional</h5>
+			<p-dataView #dv [value]="books" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
 				<ng-template pTemplate="header">
 					<div class="flex flex-column md:flex-row md:justify-content-between gap-2">
 						<p-dataViewLayoutOptions></p-dataViewLayoutOptions>
 					</div>
 				</ng-template>
                 <!--Inicio: vista en modo lista-->
-				<ng-template let-product pTemplate="listItem">
+				<ng-template let-book pTemplate="listItem">
 					<div class="col-12">
 						<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
-							<img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"/>
+
+              <img [src]="book.coverPath |imagen" class="my-4 md:my-0 w-9 md:w-10rem shadow-5 mr-5" >
+
 							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
-								<div class="font-bold text-2xl">{{product.title}}</div>
-								<div class="mb-2">{{product.description}}</div>
+								<div class="font-bold text-2xl">{{book.title}}</div>
+								<div class="mb-2">{{book.description}}</div>
 
 
 							</div>
@@ -29,13 +31,14 @@
 				</ng-template>
                 <!--FIN: vista en modo lista-->
                 <!--Inicio: vista en Grilla-->
-				<ng-template let-product pTemplate="gridItem">
+				<ng-template let-book pTemplate="gridItem">
 					<div class="col-12 md:col-4">
 						<div class="card m-3 border-1 surface-border">
 							<div class="flex flex-column align-items-center text-center mb-3">
-								<img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" class="w-9 shadow-2 my-3 mx-0"/>
-								<div class="text-2xl font-bold">{{product.name}}</div>
-								<div class="mb-3">{{product.description}}</div>
+
+                <img class="w-9 shadow-5 my-3 mx-0" [src]="book.coverPath |imagen" >
+								<div class="text-2xl font-bold">{{book.title}}</div>
+								<div class="mb-3">{{book.description}}</div>
 							</div>
 							<div class="flex align-items-center justify-content-between">
 								<p-button icon="pi pi-download"></p-button>

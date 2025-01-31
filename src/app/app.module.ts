@@ -8,9 +8,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { LoginComponent } from './auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
-import { ApiImgPipePipe } from './shared/api-img-pipe.pipe';
-import { ContenidoListarHomeComponent } from './home/contenido-listar-home/contenido-listar-home.component';
-import { DataViewModule } from 'primeng/dataview';
+
 import { HomeModule } from './home/home.module';
 
 @NgModule({

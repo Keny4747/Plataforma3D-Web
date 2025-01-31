@@ -3,17 +3,18 @@ import { SelectItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { Book } from 'src/app/admin/contenido-adicional/shared/book.model';
 import { ContenidoService } from 'src/app/admin/contenido-adicional/shared/contenido.service';
+import { ApiImgPipePipe } from 'src/app/shared/api-img-pipe.pipe';
 
 @Component({
   selector: 'app-contenido-listar-home',
   templateUrl: './contenido-listar-home.component.html',
   styleUrls: ['./contenido-listar-home.component.scss'],
-  providers: [ButtonModule]
+  providers: [ApiImgPipePipe]
 
 })
 export class ContenidoListarHomeComponent implements OnInit{
 
-  products: Book[] = [];
+  books: Book[] = [];
 
   sortOptions: SelectItem[] = [];
 
@@ -30,7 +31,7 @@ export class ContenidoListarHomeComponent implements OnInit{
   constructor(private productService: ContenidoService) { }
 
   ngOnInit() {
-      this.productService.getAll().subscribe(data => this.products = data);
+      this.productService.getAll().subscribe(data => this.books = data);
 
 
 
