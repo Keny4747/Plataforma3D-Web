@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +31,6 @@ export class AuthService {
       );
   }
 
-  logout() {
-    sessionStorage.removeItem('credentials');
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem('fullName');
-  }
-
   isAuthenticated(): boolean {
     return sessionStorage.getItem('credentials') !== null;
   }
@@ -55,4 +49,11 @@ export class AuthService {
       'Authorization': `Basic ${credentials}`
     });
   }
+
+
+  logout() {
+
+  }
+
+
 }

@@ -18,6 +18,13 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { CommonModule } from '@angular/common';
 import { AvatarModule } from 'primeng/avatar';
+import { CapitalizarPipe } from '../shared/capitalizar.pipe';
+import { MenuModule } from 'primeng/menu';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
     declarations: [
@@ -27,6 +34,7 @@ import { AvatarModule } from 'primeng/avatar';
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        CapitalizarPipe
     ],
     imports: [
         CommonModule,
@@ -41,8 +49,17 @@ import { AvatarModule } from 'primeng/avatar';
         RippleModule,
         RouterModule,
         AppConfigModule,
-        AvatarModule
+        AvatarModule,
+        MenuModule,
+        ButtonModule,
+        ConfirmDialogModule,
+        ToastModule,
+        ConfirmPopupModule
+
     ],
-    exports: [AppLayoutComponent]
+    exports: [AppLayoutComponent],
+    providers: [
+      ConfirmationService, MessageService
+    ]
 })
 export class AppLayoutModule { }
