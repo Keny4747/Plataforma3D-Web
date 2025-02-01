@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { map, Observable, tap } from 'rxjs';
 export class AuthService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<boolean> {
     const headers = new HttpHeaders({
@@ -52,7 +53,13 @@ export class AuthService {
 
 
   logout() {
+    // Eliminar las credenciales del sessionStorage
+    sessionStorage.removeItem('credentials');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('fullName');
 
+    // Redirigir al usuario a la página de login
+    this.router.navigate(['/login']);
   }
 
 

@@ -46,19 +46,19 @@ export class AppTopBarComponent implements OnInit {
   confirm(event: Event) {
     this.confirmationService.confirm({
         key: 'confirm',
-        target: event.target || new EventTarget,
+        target: event.target || new EventTarget(), // Aquí usas el evento si lo necesitas
         message: 'Estás seguro de cerrar sesión?',
         acceptLabel: 'Sí',
         rejectLabel: 'No',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            console.log('You have accepted');
+            this.authService.logout();
         },
         reject: () => {
-          console.log('You have rejected');
+            console.log('You have rejected');
         }
     });
-  }
+}
 
 }
 
