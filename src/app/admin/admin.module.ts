@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { DocenteNewComponent } from './usuarios/docente-new/docente-new.component';
 import { EstudianteListComponent } from './usuarios/estudiante-list/estudiante-list.component';
 import { AppLayoutModule } from '../layout/app.layout.module';
 
@@ -14,19 +13,21 @@ import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
 import { ApiImgPipePipe } from '../shared/api-img-pipe.pipe';
+import { EstudianteDetailComponent } from './usuarios/estudiante-detail/estudiante-detail.component';
 
 
 
 
 @NgModule({
   declarations: [
-    DocenteNewComponent,
+
     EstudianteListComponent,
     AdminLayoutComponent,
     CargarContenidoAdicionalComponent,
     ListarContenidoAdicionalComponent,
     EditarContenidoAdicionalComponent,
-    ApiImgPipePipe
+    ApiImgPipePipe,
+    EstudianteDetailComponent
 
   ],
   imports: [

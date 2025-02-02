@@ -8,7 +8,7 @@
               <ng-template pTemplate="left">
                   <div class="my-2">
                       <button pButton pRipple label="Registrar Alumno" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                      <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button>
+
                   </div>
               </ng-template>
 
@@ -86,6 +86,7 @@
 
                       <td>
                           <div class="flex">
+                            <button pButton pRipple icon="pi pi-database" class="p-button-rounded p-button-info mr-2"[routerLink]="['/detalle-estudiante',estudiante.id]"></button>
                               <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(estudiante)"></button>
                               <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteUsuario(estudiante)"></button>
                           </div>
