@@ -7,4 +7,5 @@ export interface Docente {
   telefono: string;
   dni: string;
   especialidad: string;
+  username: string;
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
 import { Book } from 'src/app/admin/contenido-adicional/shared/book.model';
 import { ContenidoService } from 'src/app/admin/contenido-adicional/shared/contenido.service';
 import { ApiImgPipePipe } from 'src/app/shared/api-img-pipe.pipe';
-
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-contenido-listar-home',
   templateUrl: './contenido-listar-home.component.html',
@@ -52,7 +51,16 @@ export class ContenidoListarHomeComponent implements OnInit{
           this.sortField = value;
       }
   }
-
+  downloadFile(filename: string, title: string) {
+    this.productService.downloadFile(filename).subscribe(
+      (blob: Blob) => {
+        saveAs(blob, title + '.pdf');
+      },
+      error => {
+        console.error('Error al descargar el archivo:', error);
+      }
+    );
+  }
 
 
 }

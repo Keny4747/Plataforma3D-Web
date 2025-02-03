@@ -1,2 +1,41 @@
-<p>{{usuario?.nombre}}</p>
-
+<div class="w-100 text-left">
+  <h3 class="mb-4">Detalle Usuario: </h3>
+  <hr style="border-top: 6px solid rgb(226, 89, 9); width: 50%; margin-top: -10px;">
+</div>
+<div class="flex justify-content-center flex-wrap">
+<div class="card card-detail">
+  <h4 class="mb-4" style="color: white;">Perfil Docente: </h4>
+  <hr style="border-top: 6px solid rgb(255, 255, 255); width: 40%; margin-top: -10px;">
+  <img src="../../assets/layout/images/avatar.png" alt="Imagen circular" class="circular">
+  <div class="card-body">
+    <div class="field">
+      <h2 class="field-title">Nombre:</h2>
+      <h3 class="field-value">{{usuario?.nombre}}</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">Apellido:</h2>
+      <h3 class="field-value">{{usuario?.apellido}}</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">Teléfono:</h2>
+      <h3 class="field-value">{{usuario?.telefono}}</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">Email:</h2>
+      <h3 class="field-value">{{usuario?.email}}</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">Usuario:</h2>
+      <h3 class="field-value">{{usuario?.username}}</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">Clave:</h2>
+      <h3 class="field-value">*********</h3>
+    </div>
+    <div class="field">
+      <h2 class="field-title">DNI:</h2>
+      <h3 class="field-value">{{usuario?.dni}}</h3>
+    </div>
+  </div>
+</div>
+</div>

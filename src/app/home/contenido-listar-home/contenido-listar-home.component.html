@@ -18,12 +18,14 @@
 							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
 								<div class="font-bold text-2xl">{{book.title}}</div>
 								<div class="mb-2">{{book.description}}</div>
+                <div class="mb-2">{{book.filePath}}</div>
+
 
 
 							</div>
                             <!--Inicio: Boton descargar-->
 							<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
-								<p-button icon="pi pi-download"  styleClass="mb-2 p-button-sm"></p-button>
+								<p-button icon="pi pi-download" (onClick)="downloadFile(book.filePath,book.title)" styleClass="mb-2 p-button-sm"></p-button>
 							</div>
                             <!--Fin: Boton descargar-->
 						</div>
@@ -41,7 +43,7 @@
 								<div class="mb-3">{{book.description}}</div>
 							</div>
 							<div class="flex align-items-center justify-content-between">
-								<p-button icon="pi pi-download"></p-button>
+								<p-button icon="pi pi-download" (onClick)="downloadFile(book.filePath, book.title)"></p-button>
 							</div>
 						</div>
 					</div>

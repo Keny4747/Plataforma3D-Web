@@ -1,0 +1,44 @@
+.circular {
+  width: 100px; /* Tamaño de la imagen */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 5px auto 0; /* 50px desde arriba, centrado horizontalmente */
+}
+
+.card-detail {
+  background-color: black;
+  width: 50%;
+  height: auto;
+  padding: 20px;
+  color: white;
+  margin-top: 20px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre los campos */
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre el título y el valor */
+}
+
+.field-title, .field-value {
+  margin: 0;
+  color: white; /* Asegura que el texto sea blanco */
+}
+
+.field-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.field-value {
+  font-size: 16px;
+  font-weight: normal;
+}
