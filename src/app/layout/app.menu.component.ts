@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Perfil',
                 items: [
-                    { label: 'Usuario', icon: 'pi pi-fw pi-user', routerLink: ['/'] }
+                    { label: 'Usuario', icon: 'pi pi-fw pi-user', routerLink: ['/perfil-usuario'] }
                 ]
             },
 

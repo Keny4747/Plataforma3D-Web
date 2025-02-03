@@ -1,13 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private baseUrl = 'http://localhost:8080';
+
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -16,22 +18,29 @@ export class AuthService {
       'Authorization': 'Basic ' + btoa(username + ':' + password)
     });
 
-    return this.http.get<{ username: string, fullName: string }>(`${this.baseUrl}/login`, { headers, observe: 'response' })
-      .pipe(
-        map(response => {
-          if (response.status === 200 && response.body) {
-            // Guardamos las credenciales en sessionStorage
-            sessionStorage.setItem('credentials', btoa(username + ':' + password));
-            // Guardamos el nombre de usuario y el nombre completo en sessionStorage
-            sessionStorage.setItem('username', response.body.username);
-            sessionStorage.setItem('fullName', response.body.fullName);
-            return true;
-          }
-          return false;
-        })
-      );
-  }
+    return this.http.get<{ username: string, fullName: string, id: string }>(
+      `${this.baseUrl}/login`,
+      { headers, observe: 'response' }
+    ).pipe(
+      map(response => {
+        if (response.status === 200 && response.body) {
+          // Almacenar datos en sessionStorage
+          sessionStorage.setItem('credentials', btoa(username + ':' + password));
+          sessionStorage.setItem('username', response.body.username);
+          sessionStorage.setItem('fullName', response.body.fullName || '');
+          sessionStorage.setItem('id', response.body.id || '');
 
+
+          return true;
+        }
+        return false;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error durante el login:', error);
+        return of(false);
+      })
+    );
+  }
   isAuthenticated(): boolean {
     return sessionStorage.getItem('credentials') !== null;
   }
@@ -41,7 +50,10 @@ export class AuthService {
   }
 
   getFullName(): string | null {
-    return sessionStorage.getItem('fullName'); // Método para obtener el nombre completo
+    return sessionStorage.getItem('fullName');
+  }
+  getId(): string | null {
+    return sessionStorage.getItem('id');
   }
 
   getAuthorizationHeader(): HttpHeaders {
