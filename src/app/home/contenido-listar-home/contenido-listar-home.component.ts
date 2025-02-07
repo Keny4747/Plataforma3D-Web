@@ -3,7 +3,7 @@ import { SelectItem } from 'primeng/api';
 import { Book } from 'src/app/admin/contenido-adicional/shared/book.model';
 import { ContenidoService } from 'src/app/admin/contenido-adicional/shared/contenido.service';
 import { ApiImgPipePipe } from 'src/app/shared/api-img-pipe.pipe';
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver'
 @Component({
   selector: 'app-contenido-listar-home',
   templateUrl: './contenido-listar-home.component.html',

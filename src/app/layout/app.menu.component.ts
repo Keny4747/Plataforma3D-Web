@@ -2,6 +2,7 @@ import { OnInit } from '@angular/core';
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
 import { AuthService } from '../auth/shared/auth.service';
+import { UsuariosService } from '../admin/usuarios/shared/usuarios.service';
 
 @Component({
     selector: 'app-menu',
@@ -18,7 +19,8 @@ export class AppMenuComponent implements OnInit {
   constructor(
     public layoutService: LayoutService,
     private authService: AuthService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+
   ) { }
 
   ngOnInit() {
@@ -88,8 +90,9 @@ export class AppMenuComponent implements OnInit {
           {
               label: 'Menu principal',
               items: [
-                  { label: 'Resumen', icon: 'pi pi-fw pi-gauge', routerLink: ['/uikit/formlayout'] },
+                { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/uikit/formlayout'] },
                   { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/home-contenido-adicional'] }
+
               ]
           }
       ];

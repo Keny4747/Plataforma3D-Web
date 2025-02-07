@@ -14,7 +14,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
 import { ApiImgPipePipe } from '../shared/api-img-pipe.pipe';
 import { EstudianteDetailComponent } from './usuarios/estudiante-detail/estudiante-detail.component';
-import { DocenteDetailComponent } from './usuarios/docente-detail/docente-detail.component';
+import { UsuarioDetailComponent } from './usuarios/usuario-detail/usuario-detail.component';
 
 
 
@@ -29,7 +29,7 @@ import { DocenteDetailComponent } from './usuarios/docente-detail/docente-detail
     EditarContenidoAdicionalComponent,
     ApiImgPipePipe,
     EstudianteDetailComponent,
-    DocenteDetailComponent
+    UsuarioDetailComponent
 
   ],
   imports: [
