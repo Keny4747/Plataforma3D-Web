@@ -18,7 +18,7 @@ export class AuthService {
       'Authorization': 'Basic ' + btoa(username + ':' + password)
     });
 
-    return this.http.get<{ username: string, fullName: string, id: string }>(
+    return this.http.get<{ username: string, fullName: string, id: string, role: string }>(
       `${this.baseUrl}/login`,
       { headers, observe: 'response' }
     ).pipe(
@@ -29,7 +29,7 @@ export class AuthService {
           sessionStorage.setItem('username', response.body.username);
           sessionStorage.setItem('fullName', response.body.fullName || '');
           sessionStorage.setItem('id', response.body.id || '');
-
+          sessionStorage.setItem('role', response.body.role || '');
 
           return true;
         }
@@ -52,8 +52,13 @@ export class AuthService {
   getFullName(): string | null {
     return sessionStorage.getItem('fullName');
   }
+
   getId(): string | null {
     return sessionStorage.getItem('id');
+  }
+
+  getRole(): string | null {
+    return sessionStorage.getItem('role');
   }
 
   getAuthorizationHeader(): HttpHeaders {
