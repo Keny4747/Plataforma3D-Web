@@ -7,7 +7,9 @@ import { ListarContenidoAdicionalComponent } from './contenido-adicional/listar-
 import { EditarContenidoAdicionalComponent } from './contenido-adicional/editar-contenido-adicional/editar-contenido-adicional.component';
 import { ContenidoListarHomeComponent } from '../home/contenido-listar-home/contenido-listar-home.component';
 import { EstudianteDetailComponent } from './usuarios/estudiante-detail/estudiante-detail.component';
-import { DocenteDetailComponent } from './usuarios/docente-detail/docente-detail.component';
+
+import { InicioComponent } from '../home/inicio/inicio.component';
+import { UsuarioDetailComponent } from './usuarios/usuario-detail/usuario-detail.component';
 
 const routes: Routes = [
 
@@ -15,6 +17,10 @@ const routes: Routes = [
     path: '',
     component: AppLayoutComponent,
     children: [
+      {
+        path: '',
+        component: InicioComponent
+      },
       //ruta del estudiante
       {
         path: 'estudiantes',
@@ -24,10 +30,10 @@ const routes: Routes = [
         path: 'detalle-estudiante/:id',
         component: EstudianteDetailComponent
       },
-      //ruta del docente
+      //ruta del perfil del usuario logueado
       {
         path: 'perfil-usuario',
-        component: DocenteDetailComponent
+        component: UsuarioDetailComponent
 
       },
       //ruta del contenido adicional

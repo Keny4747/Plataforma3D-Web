@@ -23,7 +23,7 @@ export class LoginComponent {
       .subscribe({
         next: (success) => {
           if (success) {
-            this.router.navigate(['/estudiantes']);
+            this.router.navigate(['/']);
           } else {
             this.error = 'Credenciales inválidas';
           }
