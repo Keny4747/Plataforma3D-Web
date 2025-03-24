@@ -19,6 +19,25 @@
           <label for="description">Descripción del archivo</label>
         </span>
 
+        <!--SELECT Unidad de aprendizaje -->
+ <hr>
+ <h5>Unidad de Aprendizaje</h5>
+        <div class="flex justify-content-center">
+          <p-listbox
+          [options]="unidadApr"
+          formControlName="selectedUnidadApr"
+          optionLabel="name"
+          dataKey="value"
+          [style]="{ width: '29rem' }"
+          [listStyle]="{ 'max-height': '150px' }">
+        </p-listbox>
+
+      </div>
+        <!-- -->
+
+
+
+
         <h5>Portada</h5>
         <div class="grid formgrid">
           <div class="form-group">

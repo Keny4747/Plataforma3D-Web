@@ -4,7 +4,7 @@ import { ContenidoService } from '../shared/contenido.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { Book } from '../shared/book.model';
+import { Book, UnidadAprendizajeEnum } from '../shared/book.model';
 
 
 @Component({
@@ -21,6 +21,14 @@ export class CargarContenidoAdicionalComponent {
 
 
   coverImageUrl: string | null = null;
+
+
+ // Unidades de aprendizaje
+  unidadApr = Object.keys(UnidadAprendizajeEnum)
+  .filter(key => isNaN(Number(key))) // Filtra solo las claves reales del enum
+  .map(key => ({ name: UnidadAprendizajeEnum[key as keyof typeof UnidadAprendizajeEnum], value: key })); // Asigna name y value correctamente
+
+  selectedUnidadApr!: string;
 
   //coverpath
 
@@ -55,7 +63,9 @@ export class CargarContenidoAdicionalComponent {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      selectedUnidadApr: ['', Validators.required]
     });
+
   }
 
   onCoverSelect(event: any): void {
@@ -86,7 +96,7 @@ export class CargarContenidoAdicionalComponent {
     const file = event.target.files[0];
     if (file) {
       this.contentFile = file;
-      console.log('Contenido seleccionado:', this.contentFile); // Depuración
+
     }
   }
 
@@ -100,7 +110,7 @@ export class CargarContenidoAdicionalComponent {
       return;
     }
 
-    const { title, description } = this.bookForm.value;
+    const { title, description, selectedUnidadApr } = this.bookForm.value;
     const files = [this.coverFile, this.contentFile];
 
     this.contenidoService.uploadFiles(files).subscribe(
@@ -110,9 +120,11 @@ export class CargarContenidoAdicionalComponent {
         const book: Book = {
           title: title,
           description: description,
+          unidadAprendizaje: selectedUnidadApr.value,
           coverPath: coverPath,
           filePath: filePath,
         };
+
 
         this.contenidoService.create(book).subscribe(
           (response) => {

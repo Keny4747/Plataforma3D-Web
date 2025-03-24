@@ -20,6 +20,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { AvatarModule } from 'primeng/avatar';
 import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ListboxModule } from 'primeng/listbox';
+import { TagModule } from 'primeng/tag';
 @NgModule({
   declarations: [],
   imports: [
@@ -46,7 +48,10 @@ import { FieldsetModule } from 'primeng/fieldset';
     DataViewModule,
     AvatarModule ,
     CardModule,
-    FieldsetModule
+    FieldsetModule,
+    ListboxModule,
+    TagModule
+
   ]
 })
 export class PrimeModule { }
