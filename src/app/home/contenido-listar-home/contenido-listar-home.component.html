@@ -18,9 +18,7 @@
 							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
 								<div class="font-bold text-2xl">{{book.title}}</div>
 								<div class="mb-2">{{book.description}}</div>
-                <div class="mb-2">{{book.filePath}}</div>
-
-
+                <p-tag icon="pi pi-graduation-cap" severity="success" value= '{{book.unidadAprendizaje}}'/>
 
 							</div>
                             <!--Inicio: Boton descargar-->
@@ -41,9 +39,11 @@
                 <img class="w-9 shadow-5 my-3 mx-0" [src]="book.coverPath |imagen" >
 								<div class="text-2xl font-bold">{{book.title}}</div>
 								<div class="mb-3">{{book.description}}</div>
+
 							</div>
 							<div class="flex align-items-center justify-content-between">
 								<p-button icon="pi pi-download" (onClick)="downloadFile(book.filePath, book.title)"></p-button>
+                <p-tag icon="pi pi-graduation-cap" severity="success" value= '{{book.unidadAprendizaje}}'/>
 							</div>
 						</div>
 					</div>
