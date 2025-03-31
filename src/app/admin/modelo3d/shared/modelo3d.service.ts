@@ -14,4 +14,12 @@ export class Modelo3dService {
     return this.http.get<Modelo3D[]>(`${environment.apiBase}/api/modelos`);
   }
 
+  create(modelo: Modelo3D): Observable<Modelo3D> {
+    return this.http.post<Modelo3D>(`${environment.apiBase}/api/modelos`, modelo);
+  }
+
+  //metodo eliminar termporal
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiBase}/api/modelos/${id}`);
+  }
 }

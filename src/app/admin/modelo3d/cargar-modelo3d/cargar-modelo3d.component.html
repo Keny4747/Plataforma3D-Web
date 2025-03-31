@@ -1,1 +1,72 @@
-<p>cargar-modelo3d works!</p>
+<div class="grid p-fluid">
+  <div class="col-12 md:col-6">
+    <div class="card">
+      <div class="w-100 text-center">
+        <h3 class="mb-4">Registrar Nuevo Modelo 3D</h3>
+        <hr style="border-top: 6px solid rgb(226, 89, 9); width: 100%;">
+      </div>
+
+      <form [formGroup]="model3DForm" (ngSubmit)="onUpload()">
+        <h5>Nombre</h5>
+        <span class="p-float-label">
+          <input id="nombre" type="text" pInputText formControlName="nombre">
+          <label for="nombre">Nombre del modelo</label>
+        </span>
+
+        <h5>Descripción</h5>
+        <span class="p-float-label">
+          <textarea id="descripcion" rows="5" cols="30" pInputTextarea formControlName="descripcion"></textarea>
+          <label for="descripcion">Descripción del modelo</label>
+        </span>
+
+        <h5>Unidad de Aprendizaje</h5>
+        <div class="flex justify-content-center">
+          <p-listbox
+            [options]="unidadApr"
+            formControlName="unidadAprendizajeSelect"
+            optionLabel="name"
+            dataKey="value"
+            [style]="{ width: '29rem' }"
+            [listStyle]="{ 'max-height': '150px' }">
+          </p-listbox>
+        </div>
+
+        <h5>Archivo Externo:</h5>
+        <p-inputSwitch formControlName="esExterno"></p-inputSwitch>
+
+        <div *ngIf="model3DForm.get('esExterno')?.value">
+
+          <span class="p-float-label">
+            <textarea id="embedCode" rows="5" cols="30" pInputTextarea formControlName="embedCode"></textarea>
+            <label for="embedCode">Pega aquí el código embed</label>
+          </span>
+        </div>
+
+
+
+        <hr>
+        <div class="grid formgrid">
+          <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+            <button
+              pButton
+              pRipple
+              label="Cancelar"
+              class="p-button-secondary"
+              routerLink="/listar-modelos3d">
+            </button>
+          </div>
+          <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+            <button
+              pButton
+              pRipple
+              label="Guardar"
+              class="p-button-success"
+              type="submit"
+              [disabled]="model3DForm.invalid">
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,8 @@ import { EstudianteDetailComponent } from './usuarios/estudiante-detail/estudian
 import { UsuarioDetailComponent } from './usuarios/usuario-detail/usuario-detail.component';
 
 import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-modelo3d.component';
+import { CargarModelo3dComponent } from './modelo3d/cargar-modelo3d/cargar-modelo3d.component';
+import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
 
 
 
@@ -32,8 +34,9 @@ import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-model
     ApiImgPipePipe,
     EstudianteDetailComponent,
     UsuarioDetailComponent,
-
-    ListarModelo3dComponent
+    ListarModelo3dComponent,
+    CargarModelo3dComponent,
+    VerModelo3dComponent,
 
   ],
   imports: [
