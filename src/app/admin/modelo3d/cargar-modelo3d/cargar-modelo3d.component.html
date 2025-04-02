@@ -34,36 +34,35 @@
         <h5>Archivo Externo:</h5>
         <p-inputSwitch formControlName="esExterno"></p-inputSwitch>
 
-        <div *ngIf="model3DForm.get('esExterno')?.value">
-
+        <!-- Si es un archivo externo, muestra el campo de URL -->
+        <div *ngIf="model3DForm.get('esExterno')?.value" class="mt-3">
           <span class="p-float-label">
-            <textarea id="embedCode" rows="5" cols="30" pInputTextarea formControlName="embedCode"></textarea>
-            <label for="embedCode">Pega aquí el código embed</label>
+            <input id="embedCode" type="text" pInputText formControlName="embedCode">
+            <label for="embedCode">Pega aquí la URL</label>
           </span>
         </div>
 
-
+        <!-- Si no es externo, permite la selección de archivos -->
+        <div *ngIf="!model3DForm.get('esExterno')?.value" class="grid formgrid">
+          <div class="form-group">
+            <label for="contentFile">Seleccionar archivo</label>
+            <input
+              type="file"
+              class="form-control"
+              id="contentFile"
+              accept=".fbx, .gltf, .glb, .obj, .stl"
+              (change)="onFileChange($event)"
+            />
+          </div>
+        </div>
 
         <hr>
         <div class="grid formgrid">
           <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
-            <button
-              pButton
-              pRipple
-              label="Cancelar"
-              class="p-button-secondary"
-              routerLink="/listar-modelos3d">
-            </button>
+            <button pButton pRipple label="Cancelar" class="p-button-secondary" routerLink="/listar-modelos3d"></button>
           </div>
           <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
-            <button
-              pButton
-              pRipple
-              label="Guardar"
-              class="p-button-success"
-              type="submit"
-              [disabled]="model3DForm.invalid">
-            </button>
+            <button pButton pRipple label="Guardar" class="p-button-success" type="submit" [disabled]="model3DForm.invalid"></button>
           </div>
         </div>
       </form>
