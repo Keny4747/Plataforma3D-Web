@@ -1,0 +1,34 @@
+<div class="card p-4">
+  <h2 *ngIf="currentModelo">{{ currentModelo.nombre }}</h2>
+
+  <div *ngIf="currentModelo">
+    <p>{{ currentModelo.descripcion }}</p>
+
+    <!-- Mensaje de error -->
+    <div *ngIf="loadError" class="alert alert-danger">
+      No se pudo cargar el modelo 3D. Verifica la URL.
+    </div>
+
+    <!-- Contenedor del modelo -->
+    <div *ngIf="safeEmbedUrl && !loadError" class="sketchfab-embed-wrapper">
+      <iframe
+        [src]="safeEmbedUrl"
+        title="{{ currentModelo.nombre }}"
+        frameborder="0"
+        allowfullscreen
+
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        xr-spatial-tracking
+        execution-while-out-of-viewport
+        execution-while-not-rendered
+        web-share>
+      </iframe>
+    </div>
+  </div>
+
+  <div *ngIf="!currentModelo && !loadError" class="loading-spinner">
+    <p>Cargando modelo 3D...</p>
+  </div>
+</div>

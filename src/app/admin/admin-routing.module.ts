@@ -10,6 +10,9 @@ import { EstudianteDetailComponent } from './usuarios/estudiante-detail/estudian
 
 import { InicioComponent } from '../home/inicio/inicio.component';
 import { UsuarioDetailComponent } from './usuarios/usuario-detail/usuario-detail.component';
+import { CargarModelo3dComponent } from './modelo3d/cargar-modelo3d/cargar-modelo3d.component';
+import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-modelo3d.component';
+import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
 
 const routes: Routes = [
 
@@ -53,6 +56,23 @@ const routes: Routes = [
       {
         path: 'home-contenido-adicional',
         component: ContenidoListarHomeComponent
+      },
+
+      //ruta del modelo 3D
+      {
+        path: 'listar-modelos3d',
+        component: ListarModelo3dComponent
+      },
+      {
+        path: 'cargar-modelo3d',
+        component: CargarModelo3dComponent
+
+      },
+
+      {
+        path: 'detalle-modelo3d/:id',
+        component: VerModelo3dComponent
+
       },
       ]
   }

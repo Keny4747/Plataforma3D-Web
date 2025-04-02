@@ -22,6 +22,7 @@ import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ListboxModule } from 'primeng/listbox';
 import { TagModule } from 'primeng/tag';
+import { InputSwitchModule } from 'primeng/inputswitch';
 @NgModule({
   declarations: [],
   imports: [
@@ -50,7 +51,8 @@ import { TagModule } from 'primeng/tag';
     CardModule,
     FieldsetModule,
     ListboxModule,
-    TagModule
+    TagModule,
+    InputSwitchModule
 
   ]
 })
