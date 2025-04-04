@@ -35,7 +35,9 @@
               "node_modules/primeicons/primeicons.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@google/model-viewer/dist/model-viewer.min.js"
+            ]
           },
           "configurations": {
             "production": {

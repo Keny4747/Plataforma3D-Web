@@ -20,7 +20,7 @@ import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-model
 import { CargarModelo3dComponent } from './modelo3d/cargar-modelo3d/cargar-modelo3d.component';
 import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
 
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.compo
     ReactiveFormsModule,
     FileUploadModule
 
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AdminModule { }
