@@ -24,10 +24,6 @@ export class Modelo3dService {
   }
 
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${environment.apiBase}/api/modelos/${id}`);
-  }
-
   //TODO:endpoints para subir modelo 3d
   uploadModel(file: File): Observable<any> {
     const formData = new FormData();
@@ -35,5 +31,10 @@ export class Modelo3dService {
 
     return this.http.post(`${environment.apiBase}/api/s3/upload`, formData);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiBase}/api/modelos/${id}`);
+  }
+
 
 }
