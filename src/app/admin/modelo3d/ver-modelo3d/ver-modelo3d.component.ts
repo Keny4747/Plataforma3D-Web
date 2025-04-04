@@ -23,21 +23,24 @@ export class VerModelo3dComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.modeloId = +this.route.snapshot.paramMap.get('id')!;
+    this.modeloId = Number(this.route.snapshot.paramMap.get('id'));
 
     if (this.modeloId) {
       this.modelo3dService.get(this.modeloId).subscribe({
         next: (modelo) => {
           this.currentModelo = modelo;
-          this.safeEmbedUrl = this.generateSafeEmbedUrl(modelo.embedCode ?? '');
+
+          if (modelo.esExterno && modelo.embedCode) {
+            this.safeEmbedUrl = this.generateSafeEmbedUrl(modelo.embedCode);
+          }
         },
-        error: () => this.loadError = true
+        error: () => (this.loadError = true)
       });
     }
   }
 
   private generateSafeEmbedUrl(sketchfabUrl: string): SafeResourceUrl {
-    // Convierte la URL pública en URL de embed
+
     const embedUrl = sketchfabUrl.replace('/models/', '/models/') + '/embed';
     return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
   }

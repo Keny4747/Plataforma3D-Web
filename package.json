@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@google/model-viewer": "^4.0.0",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "file-saver": "^2.0.5",

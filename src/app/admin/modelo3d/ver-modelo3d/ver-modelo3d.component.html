@@ -9,22 +9,31 @@
       No se pudo cargar el modelo 3D. Verifica la URL.
     </div>
 
-    <!-- Contenedor del modelo -->
-    <div *ngIf="safeEmbedUrl && !loadError" class="sketchfab-embed-wrapper">
+    <!-- Si el modelo es externo (Sketchfab u otro visor) -->
+    <div *ngIf="currentModelo.esExterno && safeEmbedUrl && !loadError" class="sketchfab-embed-wrapper">
       <iframe
         [src]="safeEmbedUrl"
         title="{{ currentModelo.nombre }}"
         frameborder="0"
         allowfullscreen
-
         mozallowfullscreen="true"
         webkitallowfullscreen="true"
         allow="autoplay; fullscreen; xr-spatial-tracking"
-        xr-spatial-tracking
         execution-while-out-of-viewport
-        execution-while-not-rendered
-        web-share>
+        execution-while-not-rendered>
       </iframe>
+    </div>
+
+    <!-- Si el modelo es subido a DigitalOcean (usamos model-viewer) -->
+    <div *ngIf="!currentModelo.esExterno && currentModelo.url">
+      <model-viewer
+        src="{{ currentModelo.url }}"
+        alt="Modelo 3D"
+        auto-rotate
+        camera-controls
+        shadow-intensity="1"
+        style="width: 100%; height: 500px;">
+      </model-viewer>
     </div>
   </div>
 
