@@ -24,16 +24,18 @@ export class Modelo3dService {
   }
 
 
+  uploadFile(file: File, tipo: 'imagen' | 'modelos3D'): Observable<any> {
+    const formData = new FormData();
+    formData.append('files', file);
+    formData.append('tipo', tipo);
+    return this.http.post<any>(`${environment.apiBase}/api/s3/upload`, formData);
+  }
+
+
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${environment.apiBase}/api/modelos/${id}`);
   }
 
-  //TODO:endpoints para subir modelo 3d
-  uploadModel(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    return this.http.post(`${environment.apiBase}/api/s3/upload`, formData);
-  }
 
 }

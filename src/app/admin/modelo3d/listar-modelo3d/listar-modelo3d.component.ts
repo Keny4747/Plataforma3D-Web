@@ -46,6 +46,10 @@ export class ListarModelo3dComponent {
     this.deleteProductDialog = true;
   }
 
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
   confirmDelete(): void {
     if (this.modeloToDelete && this.modeloToDelete.id !== undefined) {
       this.modelo3DService.delete(this.modeloToDelete.id).subscribe({
@@ -57,7 +61,7 @@ export class ListarModelo3dComponent {
             life: 3000,
           });
 
-          this.getModelos();
+          this.getModelos();  // Actualizar la lista
         },
         error: (err) => {
           this.messageService.add({
@@ -73,7 +77,4 @@ export class ListarModelo3dComponent {
     this.modeloToDelete = null;
   }
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
-  }
 }

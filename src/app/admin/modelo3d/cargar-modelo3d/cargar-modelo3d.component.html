@@ -30,6 +30,19 @@
             [listStyle]="{ 'max-height': '150px' }">
           </p-listbox>
         </div>
+        <h5>Portada</h5>
+        <div class="grid formgrid">
+          <div class="form-group">
+            <label for="coverFile">Seleccionar imagen de vista previa:</label>
+            <input
+              type="file"
+              class="form-control"
+              id="coverFile"
+              (change)="onCoverSelect($event)"
+              accept="image/*"
+            />
+          </div>
+        </div>
 
         <h5>Archivo Externo:</h5>
         <p-inputSwitch formControlName="esExterno"></p-inputSwitch>
@@ -66,6 +79,18 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 md:col-6">
+  <div class="card">
+    <h5>Vista previa de la portada</h5>
+    <div *ngIf="coverImageUrl">
+      <img [src]="coverImageUrl" alt="Portada seleccionada" style="max-width: 100%; height: auto; border-radius: 8px;">
+    </div>
+    <div *ngIf="!coverImageUrl">
+      <p>No se ha seleccionado ninguna imagen de portada.</p>
     </div>
   </div>
 </div>

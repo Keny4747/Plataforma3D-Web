@@ -7,5 +7,6 @@ export interface Modelo3D {
   unidadAprendizaje?: string;
   embedCode?: string;
   subidoPor?: string;
+  coverPath?: string;
 
 }
