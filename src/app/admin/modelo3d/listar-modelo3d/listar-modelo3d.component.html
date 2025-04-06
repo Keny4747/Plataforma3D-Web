@@ -53,10 +53,12 @@
             <td style="width:14%; min-width:10rem;">
               <span class="p-column-title">Descripción</span> {{ modelo.descripcion }}
             </td>
+
             <td style="width:14%; min-width:8rem;">
-              <span class="p-column-title">Vista Previa</span>
-              <img [src]="modelo.previewPath" class="my-4 md:my-0 w-9 md:w-10rem shadow-5 mr-5">
-            </td>
+              <span class="p-column-title">Portada</span>
+              <img [src]="modelo.coverPath" class="my-4 md:my-0 w-9 md:w-10rem shadow-5 mr-5" >
+           </td>
+
             <td style="width:14%; min-width:8rem;">
               <span class="p-column-title">F. Creación</span>
               {{ modelo.createdAt | date: 'dd/MM/yyyy' }}
@@ -69,8 +71,10 @@
               <div class="flex">
                 <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-help mr-2"
                         [routerLink]="['/detalle-modelo3d', modelo.id]"></button>
+                <!-- inicio: aqui se tiene que renderizar la imagen de portada -->
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
                         [routerLink]="['/editar-modelo3d', modelo.id]"></button>
+                <!-- fin: aqui se tiene que renderizar la imagen de portada -->
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
                         (click)="deleteModelo(modelo)"></button>
               </div>
