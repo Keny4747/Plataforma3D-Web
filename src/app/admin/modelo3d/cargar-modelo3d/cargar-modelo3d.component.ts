@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { UnidadAprendizajeEnum } from '../../contenido-adicional/shared/book.model';
 import { Modelo3D } from '../shared/modelo3d.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cargar-modelo3d',
@@ -13,7 +14,11 @@ import { Modelo3D } from '../shared/modelo3d.model';
 })
 export class CargarModelo3dComponent {
   model3DForm: FormGroup;
-  selectedFile: File | null = null; // Para almacenar el archivo seleccionado
+  selectedFile: File | null = null;
+
+ //imagen de vista previa
+  coverFile: File | null = null;
+  coverImageUrl: string | null = null;
 
   unidadApr = Object.keys(UnidadAprendizajeEnum)
     .filter(key => isNaN(Number(key)))
@@ -46,12 +51,13 @@ export class CargarModelo3dComponent {
     });
   }
 
-  //  Método para capturar el archivo seleccionado
+
   onFileChange(event: any) {
-    this.selectedFile = event.target.files[0]; // Guarda el archivo en la variable
+    this.selectedFile = event.target.files[0];
   }
 
-  // Método para subir archivo y guardar el modelo
+
+
   onUpload(): void {
     if (this.model3DForm.invalid) {
       this.messageService.add({
@@ -62,53 +68,78 @@ export class CargarModelo3dComponent {
       return;
     }
 
-    if (this.model3DForm.value.esExterno) {
-      //  Si es externo, solo guarda la URL ingresada
-      const modelo3D: Modelo3D = {
-        nombre: this.model3DForm.value.nombre,
-        embedCode: this.model3DForm.value.embedCode,
-        esExterno: true,
-        descripcion: this.model3DForm.value.descripcion,
-        unidadAprendizaje: this.model3DForm.value.unidadAprendizajeSelect.value
-      };
+    const esExterno = this.model3DForm.value.esExterno;
 
-      this.saveModel(modelo3D);
-    } else {
-      // Si no es externo, sube el archivo a DigitalOcean Spaces
-      if (!this.selectedFile) {
+    if (esExterno) {
+      // Si tiene imagen de portada, súbela
+      if (this.coverFile) {
+        this.modeloService.uploadFile(this.coverFile, 'imagen').subscribe(
+          (res) => {
+            const coverPath = res.filenames[0];
+
+            const modelo3D: Modelo3D = {
+              nombre: this.model3DForm.value.nombre,
+              embedCode: this.model3DForm.value.embedCode,
+              esExterno: true,
+              descripcion: this.model3DForm.value.descripcion,
+              coverPath: coverPath,
+              unidadAprendizaje: this.model3DForm.value.unidadAprendizajeSelect.value
+            };
+
+            this.saveModel(modelo3D);
+          },
+          (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Error al subir la imagen de portada.',
+            });
+          }
+        );
+      } else {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Selecciona un archivo para subir.',
+          detail: 'Selecciona una imagen de portada para el modelo externo.',
+        });
+      }
+    } else {
+      if (!this.selectedFile || !this.coverFile) {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Selecciona el archivo del modelo y la imagen de portada.',
         });
         return;
       }
 
-      this.modeloService.uploadModel(this.selectedFile).subscribe(
-        (response) => {
-
+      // Subimos portada e imagen separadamente
+      forkJoin([
+        this.modeloService.uploadFile(this.coverFile, 'imagen'),
+        this.modeloService.uploadFile(this.selectedFile, 'modelos3D')
+      ]).subscribe(
+        ([imgRes, modelRes]) => {
           const modelo3D: Modelo3D = {
             nombre: this.model3DForm.value.nombre,
-            url: response.url,
+            url: modelRes.filenames[0],
+            coverPath: imgRes.filenames[0],
             esExterno: false,
             descripcion: this.model3DForm.value.descripcion,
             unidadAprendizaje: this.model3DForm.value.unidadAprendizajeSelect.value
           };
-
-
           this.saveModel(modelo3D);
         },
-        (error) => {
-          console.error('Error al subir el modelo 3D:', error);
+        (err) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Hubo un error al subir el modelo 3D.',
+            detail: 'Error al subir archivos al servidor.',
           });
         }
       );
     }
   }
+
 
 
   private saveModel(modelo3D: Modelo3D) {
@@ -131,4 +162,32 @@ export class CargarModelo3dComponent {
       }
     );
   }
+
+
+  onCoverSelect(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+
+      if (file.type.startsWith('image/')) {
+        this.coverFile = file;
+
+
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.coverImageUrl = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Por favor, selecciona un archivo de imagen válido.',
+        });
+        event.target.value = '';
+      }
+    }
+  }
+
+
+
 }

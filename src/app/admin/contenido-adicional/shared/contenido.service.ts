@@ -39,8 +39,7 @@ export class ContenidoService {
     files.forEach((file, index) => {
       formData.append('files', file);
     });
-    //mostrar el contenido del formData en la consola
-    console.log(formData);
+
 
     return this.http.post(`${environment.apiBase}/api/media/upload`, formData);
   }
