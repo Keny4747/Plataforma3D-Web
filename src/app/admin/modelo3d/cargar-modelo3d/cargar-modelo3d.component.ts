@@ -16,7 +16,7 @@ export class CargarModelo3dComponent {
   model3DForm: FormGroup;
   selectedFile: File | null = null;
 
- //imagen de vista previa
+
   coverFile: File | null = null;
   coverImageUrl: string | null = null;
 
@@ -36,10 +36,10 @@ export class CargarModelo3dComponent {
       unidadAprendizajeSelect: ['', Validators.required],
       esExterno: [false],
       embedCode: [''],
-      file: [null] // Agregamos el campo para el archivo
+      file: [null]
     });
 
-    // Escucha cambios en el switch "esExterno"
+
     this.model3DForm.get('esExterno')?.valueChanges.subscribe((value) => {
       if (value) {
         this.model3DForm.get('embedCode')?.setValidators([Validators.required]);
@@ -71,7 +71,7 @@ export class CargarModelo3dComponent {
     const esExterno = this.model3DForm.value.esExterno;
 
     if (esExterno) {
-      // Si tiene imagen de portada, súbela
+
       if (this.coverFile) {
         this.modeloService.uploadFile(this.coverFile, 'imagen').subscribe(
           (res) => {
@@ -113,7 +113,7 @@ export class CargarModelo3dComponent {
         return;
       }
 
-      // Subimos portada e imagen separadamente
+
       forkJoin([
         this.modeloService.uploadFile(this.coverFile, 'imagen'),
         this.modeloService.uploadFile(this.selectedFile, 'modelos3D')

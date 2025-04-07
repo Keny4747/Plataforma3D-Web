@@ -5,7 +5,7 @@ import { UnidadAprendizajeEnum } from '../../contenido-adicional/shared/book.mod
 import { ActivatedRoute, Router } from '@angular/router';
 import { Modelo3dService } from '../shared/modelo3d.service';
 import { MessageService } from 'primeng/api';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 @Component({
   selector: 'app-editar-modelo3d',
   templateUrl: './editar-modelo3d.component.html',
@@ -114,7 +114,6 @@ export class EditarModelo3dComponent implements OnInit {
     }
 
     const esExterno = this.model3DForm.value.esExterno;
-
     const unidadAprendizajeValue = this.model3DForm.value.unidadAprendizajeSelect.value || this.model3DForm.value.unidadAprendizajeSelect;
 
     if (esExterno) {
@@ -134,31 +133,42 @@ export class EditarModelo3dComponent implements OnInit {
           }
         );
       } else {
-        this.updateModelo(null, null); // actualiza sin cambiar portada
+        this.updateModelo(null, null);
       }
     } else {
-      // Modelo local
-      if (this.selectedFile && this.coverFile) {
-        forkJoin([
-          this.modeloService.uploadFile(this.coverFile, 'imagen'),
-          this.modeloService.uploadFile(this.selectedFile, 'modelos3D')
-        ]).subscribe(
-          ([imgRes, modelRes]) => {
-            this.updateModelo(imgRes.filenames[0], modelRes.filenames[0]);
-          },
-          err => {
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: 'Error al subir archivos.'
-            });
-          }
-        );
+
+      const uploads = [];
+
+      if (this.coverFile) {
+        uploads.push(this.modeloService.uploadFile(this.coverFile, 'imagen'));
       } else {
-        this.updateModelo(null, null); // actualiza solo metadatos
+        uploads.push(of({ filenames: [null] }));
       }
+
+      if (this.selectedFile) {
+        uploads.push(this.modeloService.uploadFile(this.selectedFile, 'modelos3D'));
+      } else {
+        uploads.push(of({ filenames: [null] }));
+      }
+
+      forkJoin(uploads).subscribe(
+        ([imgRes, modelRes]) => {
+          this.updateModelo(
+            imgRes.filenames[0] ?? null,
+            modelRes.filenames[0] ?? null
+          );
+        },
+        err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Error al subir archivos.'
+          });
+        }
+      );
     }
   }
+
 
   private updateModelo(coverPath: string | null, filePath: string | null): void {
     const formValues = this.model3DForm.value;
@@ -170,7 +180,9 @@ export class EditarModelo3dComponent implements OnInit {
       unidadAprendizaje: formValues.unidadAprendizajeSelect.value || formValues.unidadAprendizajeSelect,
       esExterno: formValues.esExterno,
       embedCode: formValues.esExterno ? formValues.embedCode : undefined,
-      url: formValues.esExterno ? undefined : (filePath || this.modeloActual!.url),
+      url: formValues.esExterno
+        ? undefined
+        : (filePath !== null ? filePath : this.modeloActual!.url),
       coverPath: coverPath || this.modeloActual!.coverPath
     };
 
