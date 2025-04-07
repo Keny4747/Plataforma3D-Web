@@ -13,6 +13,7 @@ import { UsuarioDetailComponent } from './usuarios/usuario-detail/usuario-detail
 import { CargarModelo3dComponent } from './modelo3d/cargar-modelo3d/cargar-modelo3d.component';
 import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-modelo3d.component';
 import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
+import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-modelo3d.component';
 
 const routes: Routes = [
 
@@ -74,6 +75,11 @@ const routes: Routes = [
         component: VerModelo3dComponent
 
       },
+
+      {
+        path: 'editar-modelo3d/:id',
+        component: EditarModelo3dComponent
+      }
       ]
   }
 

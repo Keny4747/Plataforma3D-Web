@@ -37,5 +37,11 @@ export class Modelo3dService {
     return this.http.delete<void>(`${environment.apiBase}/api/modelos/${id}`);
   }
 
+  update(modelo: Modelo3D): Observable<Modelo3D> {
+
+    return this.http.put<Modelo3D>(`${environment.apiBase}/api/modelos/${modelo.id}`, modelo);
+
+  }
+
 
 }

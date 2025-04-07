@@ -10,11 +10,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 import { HomeModule } from './home/home.module';
+import { ImgModelos3dPipe } from './shared/img-modelos3d.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+
 
 
   ],
