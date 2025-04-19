@@ -27,7 +27,7 @@ import { ImgModelos3dPipe } from './shared/img-modelos3d.pipe';
     BrowserAnimationsModule,
     FormsModule,
     AppLayoutModule,
-    HomeModule
+HomeModule
   ],
   providers: [
     {

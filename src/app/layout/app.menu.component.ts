@@ -87,7 +87,7 @@ export class AppMenuComponent implements OnInit {
                     ]
                 },
                 { label: 'Reporte Estudiante', icon: 'pi pi-fw pi-file-pdf', routerLink: ['/uikit/formlayout'] },
-                { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/uikit/formlayout'] },
+                { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/modelo3d-home'] },
                 { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/home-contenido-adicional'] }
               ]
           }
@@ -105,7 +105,7 @@ export class AppMenuComponent implements OnInit {
           {
               label: 'Menu principal',
               items: [
-                { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/uikit/formlayout'] },
+                { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/modelo3d-home'] },
                   { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/home-contenido-adicional'] }
 
               ]

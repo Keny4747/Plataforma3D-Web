@@ -4,20 +4,22 @@ import { ContenidoListarHomeComponent } from './contenido-listar-home/contenido-
 import { PrimeModule } from '../prime/prime.module';
 import { ImagenPipe } from './shared/imagen.pipe';
 import { InicioComponent } from './inicio/inicio.component';
-import { CapitalizarPipe } from '../shared/capitalizar.pipe';
-
-
+import { Modelo3HomeComponent } from './modelo3-home/modelo3-home.component';
+import { RouterModule } from '@angular/router';
+import { ImgModelos3dPipe } from '../shared/img-modelos3d.pipe';
 
 @NgModule({
   declarations: [
     ContenidoListarHomeComponent,
     ImagenPipe,
-    InicioComponent
+    InicioComponent,
+    Modelo3HomeComponent
 
   ],
   imports: [
     CommonModule,
-    PrimeModule
+    PrimeModule,
+    RouterModule
   ]
 })
 export class HomeModule { }

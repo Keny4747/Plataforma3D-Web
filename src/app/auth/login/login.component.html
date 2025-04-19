@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login 07</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -10,27 +10,26 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body class="body-login">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
+	<section class="ftco-section" style="min-height: 100vh; width: 100vw; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center;">
 
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-12 col-lg-10">
-					<div class="wrap d-md-flex">
-						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
-							<img height="auto" width="600px" src="https://concepto.de/wp-content/uploads/2018/10/sistema-nervioso-central1-e1539980373501.jpg" alt="Placeholder Image">
+    <div class="container h-100">
+      <div class="text-center mb-2">
+        <img src="assets/layout/images/logo-colegio.png" alt="Logo" class="logo-login" width="380" height="120">
+      </div>
+			<div class="row justify-content-center h-100">
+				<div class="col-md-12 col-lg-10 h-100">
+					<div class="wrap d-md-flex h-100">
+						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center justify-content-center order-md-last" style="flex: 0 0 60%;">
+							<img class="img-fluid" style="max-width: 100%; height: auto; object-fit: contain;" src="https://concepto.de/wp-content/uploads/2018/10/sistema-nervioso-central1-e1539980373501.jpg" alt="Placeholder Image">
 						</div>
 
-						<div class="login-wrap p-4 p-lg-5">
-								<div class="d-flex">
-									<div class="w-100 text-center">
-										<h3 class="mb-4">Inicio de Sesión</h3>
-										<hr style="border-top: 6px solid pink; width: 50%;">
-									</div>
+						<div class="login-wrap p-4 p-lg-5 d-flex flex-column justify-content-center" style="flex: 0 0 40%;">
+							<div class="d-flex">
+								<div class="w-100 text-center">
+									<h3 class="mb-4">Inicio de Sesión</h3>
+									<hr style="border-top: 6px solid pink; width: 50%;">
 								</div>
+							</div>
 							<form action="#" class="signin-form" (ngSubmit)="onSubmit()">
 								<div class="form-group mb-3">
 									<label class="label" for="username">Usuario</label>
@@ -44,24 +43,24 @@
                    required>
 								</div>
 								<div class="form-group mb-3">
-									<label class="label" for="password">Clave</label>
+									<label class="label" for="password" style="color: #333;">Clave</label>
 									<input
                   type="password"
                   id="password"
                   [(ngModel)]="password"
                   name="password"
                   class="form-control"
-                  placeholder="Constraseña"
+                  placeholder="Contraseña"
                   required>
 								</div>
 								<div class="form-group">
 									<button type="submit" class="form-control btn btn-primary submit px-3">Iniciar Sesión</button>
-                  <p *ngIf="error" class="error">{{error}}</p>
+                  <p *ngIf="error" class="error mt-3 text-danger">{{error}}</p>
 								</div>
 								<div class="form-group d-md-flex">
 
 									<div class="w-100 text-center">
-										<p>Plataforma 3D - Indaga</p>
+										<p style="color: #333;">Plataforma 3D - Indaga</p>
 									</div>
 								</div>
 							</form>

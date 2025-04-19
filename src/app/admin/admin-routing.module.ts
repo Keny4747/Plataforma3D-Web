@@ -14,6 +14,7 @@ import { CargarModelo3dComponent } from './modelo3d/cargar-modelo3d/cargar-model
 import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-modelo3d.component';
 import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
 import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-modelo3d.component';
+import { Modelo3HomeComponent } from '../home/modelo3-home/modelo3-home.component';
 
 const routes: Routes = [
 
@@ -61,6 +62,11 @@ const routes: Routes = [
 
       //ruta del modelo 3D
       {
+        path: 'modelo3d-home',
+        component: Modelo3HomeComponent
+
+      },
+      {
         path: 'listar-modelos3d',
         component: ListarModelo3dComponent
       },
@@ -80,6 +86,7 @@ const routes: Routes = [
         path: 'editar-modelo3d/:id',
         component: EditarModelo3dComponent
       }
+
       ]
   }
 
