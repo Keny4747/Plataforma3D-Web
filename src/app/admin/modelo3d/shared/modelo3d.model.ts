@@ -1,3 +1,5 @@
+import * as e from "cors";
+
 export interface Modelo3D {
   id?: number;
   nombre: string;
@@ -9,4 +11,9 @@ export interface Modelo3D {
   subidoPor?: string;
   coverPath?: string;
 
+}
+export interface Modelo3DGenerado {
+  id?: string;
+  nombre: string;
+  url: string;
 }

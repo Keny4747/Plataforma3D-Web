@@ -23,6 +23,7 @@ import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.compo
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ImgModelos3dPipe } from '../shared/img-modelos3d.pipe';
 import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-modelo3d.component';
+import { GenerarModelo3dComponent } from './modelo3d/generar-modelo3d/generar-modelo3d.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-model
     CargarModelo3dComponent,
     VerModelo3dComponent,
     ImgModelos3dPipe,
-    EditarModelo3dComponent
+    EditarModelo3dComponent,
+    GenerarModelo3dComponent
 
   ],
   imports: [

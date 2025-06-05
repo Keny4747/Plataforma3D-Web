@@ -15,6 +15,7 @@ import { ListarModelo3dComponent } from './modelo3d/listar-modelo3d/listar-model
 import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.component';
 import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-modelo3d.component';
 import { Modelo3HomeComponent } from '../home/modelo3-home/modelo3-home.component';
+import { GenerarModelo3dComponent } from './modelo3d/generar-modelo3d/generar-modelo3d.component';
 
 const routes: Routes = [
 
@@ -85,6 +86,11 @@ const routes: Routes = [
       {
         path: 'editar-modelo3d/:id',
         component: EditarModelo3dComponent
+      },
+
+      {
+        path: 'generar-modelo3d',
+        component: GenerarModelo3dComponent
       }
 
       ]

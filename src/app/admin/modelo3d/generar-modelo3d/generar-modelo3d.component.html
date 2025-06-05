@@ -1,0 +1,169 @@
+<div class="container-fluid p-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card fade-in">
+        <div class="card-header">
+          <h3 class="mb-0">
+            <i class="pi pi-image me-2"></i>
+            Generador de Modelos 3D
+          </h3>
+        </div>
+
+        <div class="card-body p-4">
+          <!-- Sección de carga de archivo -->
+          <div class="mb-4">
+            <div class="mb-3">
+              <label for="file-input" class="form-label fw-bold">
+                <i class="pi pi-upload me-2"></i>
+                Seleccionar imagen:
+              </label>
+              <input
+                id="file-input"
+                type="file"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+                class="form-control">
+
+              <!-- Vista previa del archivo seleccionado -->
+              <small *ngIf="selectedFile" class="text-muted mt-2 d-block">
+                <i class="pi pi-file me-1"></i>
+                Archivo seleccionado: {{ selectedFile.name }}
+                ({{ (selectedFile.size / 1024).toFixed(1) }} KB)
+              </small>
+            </div>
+
+            <!-- Botón de envío -->
+            <button
+              type="button"
+              class="btn btn-primary btn-lg w-100"
+              (click)="enviarImagen()"
+              [disabled]="!selectedFile || cargando">
+
+              <i class="pi" [ngClass]="cargando ? 'pi-spin pi-spinner' : 'pi-send'"
+                 [class.me-2]="true"></i>
+              <span>
+                {{ cargando ? 'Procesando...' : 'Generar Modelo 3D' }}
+              </span>
+            </button>
+          </div>
+
+          <!-- Sección de progreso -->
+          <div *ngIf="cargando" class="mb-4">
+            <div class="progress mb-3" style="height: 8px;">
+              <div class="progress-bar progress-bar-striped progress-bar-animated"
+                   role="progressbar"
+                   style="width: 100%">
+              </div>
+            </div>
+
+            <div class="alert alert-info d-flex align-items-center">
+              <i class="pi pi-info-circle me-2"></i>
+              <div>
+                <strong>{{ mensaje || 'Procesando imagen...' }}</strong>
+                <br>
+                <small class="text-muted">
+                  El procesamiento puede tomar varios minutos. Por favor, mantén esta página abierta.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensaje de estado cuando no está cargando -->
+          <div *ngIf="mensaje && !cargando && !modelo" class="mb-4">
+            <div class="alert alert-warning d-flex align-items-center">
+              <i class="pi pi-exclamation-triangle me-2"></i>
+              <span>{{ mensaje }}</span>
+            </div>
+          </div>
+
+          <!-- Resultado del modelo generado -->
+          <div *ngIf="modelo" class="mb-4">
+            <div class="card border-success">
+              <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                  <i class="pi pi-check-circle me-2"></i>
+                  Modelo 3D Generado Exitosamente
+                </h5>
+              </div>
+
+              <div class="card-body">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <h6 class="text-muted mb-1">Nombre del modelo:</h6>
+                    <p class="h5 mb-3">{{ modelo.nombre }}</p>
+
+                    <div class="d-flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="descargarModelo()">
+                        <i class="pi pi-download me-2"></i>
+                        Descargar .glb
+                      </button>
+
+                      <a
+                        [href]="modelo.url"
+                        target="_blank"
+                        class="btn btn-outline-primary">
+                        <i class="pi pi-external-link me-2"></i>
+                        Abrir en Nueva Pestaña
+                      </a>
+
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary"
+                        (click)="copiarUrl()">
+                        <i class="pi pi-copy me-2"></i>
+                        Copiar URL
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 text-center">
+                    <div class="display-4 text-success">
+                      <i class="pi pi-box"></i>
+                    </div>
+                    <small class="text-muted">Modelo 3D listo</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Información adicional -->
+          <div class="row mt-4">
+            <div class="col-md-6 mb-3">
+              <div class="card bg-light">
+                <div class="card-body">
+                  <h6 class="card-title">
+                    <i class="pi pi-info me-2"></i>
+                    Formatos Soportados
+                  </h6>
+                  <ul class="mb-0">
+                    <li>JPG, JPEG</li>
+                    <li>PNG</li>
+                    <li>WebP</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <div class="card bg-light">
+                <div class="card-body">
+                  <h6 class="card-title">
+                    <i class="pi pi-clock me-2"></i>
+                    Tiempo de Procesamiento
+                  </h6>
+                  <p class="mb-0">
+                    Típicamente entre 5-15 minutos dependiendo de la complejidad de la imagen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

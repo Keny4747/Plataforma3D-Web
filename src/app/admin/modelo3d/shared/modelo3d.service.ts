@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Modelo3D } from './modelo3d.model';
+import { Modelo3D, Modelo3DGenerado } from './modelo3d.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -44,4 +44,14 @@ export class Modelo3dService {
   }
 
 
+  //generar modelo 3D
+  enviarImagen(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post(`${environment.apiBase}/api/send/procesar-imagen`, formData);
+  }
+
+  getGenerado(): Observable<Modelo3DGenerado> {
+  return this.http.get<Modelo3DGenerado>(`${environment.apiBase}/api/send/webhook`);
+  }
 }

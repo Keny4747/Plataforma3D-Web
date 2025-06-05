@@ -81,12 +81,16 @@ export class AppMenuComponent implements OnInit {
                                 label: 'Administrar Modelos 3D',
                                 icon: 'pi pi-fw pi-list-check',
                                 routerLink: ['/listar-modelos3d']
+                              },
+                              {
+                                label: 'Generar Modelo 3D',
+                                icon: 'pi pi-fw pi-box',
+                                routerLink: ['/generar-modelo3d']
                               }
                           ]
                       }
                     ]
                 },
-                { label: 'Reporte Estudiante', icon: 'pi pi-fw pi-file-pdf', routerLink: ['/uikit/formlayout'] },
                 { label: 'Contenido 3D', icon: 'pi pi-fw pi-video', routerLink: ['/modelo3d-home'] },
                 { label: 'Contenido Adicional', icon: 'pi pi-fw pi-book', routerLink: ['/home-contenido-adicional'] }
               ]

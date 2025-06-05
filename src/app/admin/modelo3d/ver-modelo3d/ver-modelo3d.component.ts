@@ -23,6 +23,7 @@ export class VerModelo3dComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadChatbot();
     this.modeloId = Number(this.route.snapshot.paramMap.get('id'));
 
     if (this.modeloId) {
@@ -38,11 +39,41 @@ export class VerModelo3dComponent implements OnInit {
       });
     }
   }
+  ngOnDestroy(): void {
+    this.removeChatbot(); // Limpia cuando sales del componente
+  }
 
   private generateSafeEmbedUrl(sketchfabUrl: string): SafeResourceUrl {
 
     const embedUrl = sketchfabUrl.replace('/models/', '/models/') + '/embed';
     return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+  }
+
+  loadChatbot() {
+    const script = document.createElement('script');
+    script.src = 'https://mdws2yxlcze4iturdcil436v.agents.do-ai.run/static/chatbot/widget.js';
+    script.async = true;
+    script.setAttribute('data-agent-id', 'cc469c59-1e63-11f0-bf8f-4e013e2ddde4');
+    script.setAttribute('data-chatbot-id', 'YO3UYsGA2_czJsi2YuxyBggXCbk_HMhM');
+    script.setAttribute('data-name', 'Asistente Educativo Jesus María Chatbot');
+    script.setAttribute('data-primary-color', '#031B4E');
+    script.setAttribute('data-secondary-color', '#E5E8ED');
+    script.setAttribute('data-button-background-color', '#0061EB');
+    script.setAttribute('data-starting-message', 'Hello! How can I help you today?');
+    script.setAttribute('data-logo', '/static/chatbot/icons/default-agent.svg');
+    document.body.appendChild(script);
+  }
+  removeChatbot() {
+    const existingScript = document.getElementById('chatbot-script');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // También elimina el botón flotante del DOM si es necesario
+    const widget = document.querySelector('[id^="doai-chatbot-widget"]');
+    if (widget) {
+      widget.remove();
+    }
   }
 
 }

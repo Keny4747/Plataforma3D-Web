@@ -1,0 +1,334 @@
+// Variables de colores
+$primary-gradient: linear-gradient(135deg, #5f55eb 0%, #5f55eb 100%);
+$success-gradient: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+$light-gradient: linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(233, 236, 239, 0.8) 100%);
+$info-gradient: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+$warning-gradient: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+
+// Estilos del contenedor principal
+:host {
+  display: block;
+
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+// Estilos de las tarjetas
+.card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-header {
+    background: $primary-gradient;
+    color: white;
+    border-radius: 20px 20px 0 0 !important;
+    padding: 1.5rem;
+    border: none;
+
+    h3 {
+      font-weight: 600;
+      color: white;
+
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+}
+
+// Estilos de formularios
+.form-label {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+
+  i {
+    color: #ea6666;
+  }
+}
+
+.form-control {
+  border-radius: 15px;
+  border: 2px solid #e9ecef;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+
+  &:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+  }
+
+  &:hover {
+    border-color: #dee2e6;
+  }
+}
+
+// Estilos de botones
+.btn {
+  border-radius: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background: $primary-gradient;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+
+  &:hover {
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    background: $primary-gradient;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+  }
+
+  &:disabled {
+    background: #6c757d;
+    opacity: 0.6;
+    transform: none;
+  }
+}
+
+.btn-success {
+  background: $success-gradient;
+  border: none;
+  border-radius: 10px;
+
+  &:hover {
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+    background: $success-gradient;
+  }
+}
+
+.btn-outline-primary {
+  border: 2px solid #ea6666;
+  color: #ea6666;
+  border-radius: 10px;
+
+  &:hover {
+    background: #ea6666;
+    border-color: #ea6666;
+    color: white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+}
+
+.btn-outline-secondary {
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  border-radius: 10px;
+
+  &:hover {
+    background: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+  }
+}
+
+// Estilos de progreso
+.progress {
+  border-radius: 10px;
+  background: rgba(102, 126, 234, 0.1);
+  overflow: hidden;
+
+  .progress-bar {
+    background: $primary-gradient;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+}
+
+// Estilos de alertas
+.alert {
+  border-radius: 15px;
+  border: none;
+  padding: 1rem 1.5rem;
+
+  &.alert-info {
+    background: $info-gradient;
+    color: #495057;
+    border-left: 4px solid #667eea;
+  }
+
+  &.alert-warning {
+    background: $warning-gradient;
+    color: #495057;
+    border-left: 4px solid #ffc107;
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+// Estilos de tarjetas de éxito
+.border-success {
+  border-color: #28a745 !important;
+  border-width: 2px !important;
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.1);
+}
+
+.bg-success {
+  background: $success-gradient !important;
+}
+
+// Estilos de tarjetas de información
+.bg-light {
+  background: $light-gradient !important;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 1rem;
+
+    i {
+      color: #667eea;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      padding: 0.25rem 0;
+      position: relative;
+      padding-left: 1.5rem;
+
+      &:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Animaciones
+.pi-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Estilos de iconos
+.pi {
+  font-size: 1.1rem;
+}
+
+.display-4 {
+  font-size: 3rem;
+
+  .pi {
+    font-size: 3rem;
+  }
+}
+
+// Estilos de texto
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+// Espaciado personalizado
+.gap-2 {
+  gap: 0.5rem;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .card {
+    margin: 1rem;
+    border-radius: 15px;
+
+    .card-header {
+      padding: 1rem;
+      border-radius: 15px 15px 0 0 !important;
+
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+  }
+
+  .btn-lg {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .display-4 {
+    font-size: 2rem;
+
+    .pi {
+      font-size: 2rem;
+    }
+  }
+
+  .d-flex.flex-wrap {
+    flex-direction: column;
+
+    .btn {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
