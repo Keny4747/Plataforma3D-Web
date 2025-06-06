@@ -13,33 +13,38 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./generar-modelo3d.component.scss']
 })
 export class GenerarModelo3dComponent {
- selectedFile: File | null = null;
+  selectedFile: File | null = null;
   modelo: Modelo3DGenerado | null = null;
   cargando = false;
   mensaje = '';
+  private idGenerado: string | null = null;
 
   constructor(private servicio: Modelo3dService) {}
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    // Limpiar estados anteriores al seleccionar nuevo archivo
     this.mensaje = '';
     this.modelo = null;
+    this.idGenerado = null;
   }
 
   enviarImagen() {
     if (this.selectedFile) {
       this.cargando = true;
+      this.idGenerado = uuidv4(); // 1. Generar el ID
 
-      this.servicio.enviarImagen(this.selectedFile).subscribe({
+      this.servicio.enviarImagen(this.selectedFile, this.idGenerado).subscribe({
         error: err => {
           console.warn('Error esperado al enviar imagen (puede ser 524):', err);
         }
       });
 
-      // Comenzar polling inmediatamente
       const intervalo = setInterval(() => {
-        this.servicio.getGenerado().subscribe({
+        if (!this.idGenerado) return;
+        //imprimir el ID generado
+        console.log('ID GENERADO:', this.idGenerado);
+
+        this.servicio.getGenerado(this.idGenerado).subscribe({
           next: data => {
             if (data && data.url) {
               this.modelo = data;
@@ -53,12 +58,12 @@ export class GenerarModelo3dComponent {
             clearInterval(intervalo);
           }
         });
-      }, 3000); // cada 3 segundos
+      }, 3000);
     }
   }
 
   descargarModelo() {
-    if (this.modelo && this.modelo.url) {
+    if (this.modelo?.url) {
       const link = document.createElement('a');
       link.href = this.modelo.url;
       link.download = `${this.modelo.nombre}.glb`;
@@ -70,18 +75,16 @@ export class GenerarModelo3dComponent {
   }
 
   copiarUrl() {
-    if (this.modelo && this.modelo.url) {
-      navigator.clipboard.writeText(this.modelo.url).then(() => {
-        // Opcional: mostrar toast o mensaje de confirmación
-        console.log('URL copiada al portapapeles');
-      }).catch(err => {
-        console.error('Error al copiar URL:', err);
-      });
+    if (this.modelo?.url) {
+      navigator.clipboard.writeText(this.modelo.url)
+        .then(() => console.log('URL copiada al portapapeles'))
+        .catch(err => console.error('Error al copiar URL:', err));
     }
   }
 
   cargarModelos() {
-    this.servicio.getGenerado().subscribe({
+    if (!this.idGenerado) return;
+    this.servicio.getGenerado(this.idGenerado).subscribe({
       next: data => this.modelo = data,
       error: err => console.error('Error al obtener modelos', err)
     });

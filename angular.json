@@ -68,6 +68,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+          "host": "0.0.0.0",
+          "port": 4200,
+          "publicHost": "c77e-2803-a3e0-1872-cb00-fdae-f355-d860-15a7.ngrok-free.app"
+          },
           "configurations": {
             "production": {
               "browserTarget": "plataforma3D2024-Front:build:production"
@@ -77,6 +82,7 @@
             }
           },
           "defaultConfiguration": "development"
+
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

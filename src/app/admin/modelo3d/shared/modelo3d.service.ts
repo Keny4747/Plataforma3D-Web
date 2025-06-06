@@ -45,13 +45,14 @@ export class Modelo3dService {
 
 
   //generar modelo 3D
-  enviarImagen(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('image', file);
-    return this.http.post(`${environment.apiBase}/api/send/procesar-imagen`, formData);
-  }
+enviarImagen(file: File, id: string): Observable<any> {
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('id', id); // Enviar el id al backend
+  return this.http.post(`${environment.apiBase}/api/send/procesar-imagen`, formData);
+}
 
-  getGenerado(): Observable<Modelo3DGenerado> {
-  return this.http.get<Modelo3DGenerado>(`${environment.apiBase}/api/send/webhook`);
-  }
+getGenerado(id: string): Observable<Modelo3DGenerado> {
+  return this.http.get<Modelo3DGenerado>(`${environment.apiBase}/api/send/webhook?id=${id}`);
+}
 }
