@@ -69,7 +69,7 @@ export class VerModelo3dComponent implements OnInit {
       existingScript.remove();
     }
 
-    // También elimina el botón flotante del DOM si es necesario
+
     const widget = document.querySelector('[id^="doai-chatbot-widget"]');
     if (widget) {
       widget.remove();

@@ -16,6 +16,7 @@ import { VerModelo3dComponent } from './modelo3d/ver-modelo3d/ver-modelo3d.compo
 import { EditarModelo3dComponent } from './modelo3d/editar-modelo3d/editar-modelo3d.component';
 import { Modelo3HomeComponent } from '../home/modelo3-home/modelo3-home.component';
 import { GenerarModelo3dComponent } from './modelo3d/generar-modelo3d/generar-modelo3d.component';
+import { Visor3dComponent } from './modelo3d/visor3d/visor3d.component';
 
 const routes: Routes = [
 
@@ -91,6 +92,10 @@ const routes: Routes = [
       {
         path: 'generar-modelo3d',
         component: GenerarModelo3dComponent
+      },
+      {
+        path: 'visor-modelo3d',
+        component: Visor3dComponent
       }
 
       ]

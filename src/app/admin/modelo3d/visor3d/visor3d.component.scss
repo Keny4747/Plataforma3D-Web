@@ -1,0 +1,343 @@
+// Variables
+$primary-color: #5f55eb;
+$secondary-color: #5f55eb;
+$background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$card-background: rgba(255, 255, 255, 0.95);
+$text-primary: #1e293b;
+$text-secondary: #64748b;
+$text-hint: #94a3b8;
+$border-color: #cbd5e1;
+$success-color: #10b981;
+$error-color: #ef4444;
+$shadow-light: 0 5px 15px rgba(0, 0, 0, 0.05);
+$shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.1);
+$shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.1);
+$border-radius: 15px;
+$border-radius-large: 20px;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin button-hover-effect {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba($primary-color, 0.3);
+  }
+}
+
+@mixin fade-in-animation {
+  animation: fadeInUp 0.5s ease;
+}
+
+// Global styles
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: $card-background;
+  backdrop-filter: blur(10px);
+  border-radius: $border-radius-large;
+  box-shadow: $shadow-heavy;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+}
+
+// Header
+.header {
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: white;
+  padding: 30px;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Viewer container
+.viewer-container {
+  padding: 40px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+// Drop zone
+.drop-zone {
+  border: 3px dashed $border-color;
+  border-radius: $border-radius;
+  padding: 60px 40px;
+  text-align: center;
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  @include flex-center;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+    min-height: 250px;
+  }
+
+  // Shimmer effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+
+  // Drag over state
+  &.dragover {
+    border-color: $primary-color;
+    background: linear-gradient(145deg, #eef2ff, #e0e7ff);
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba($primary-color, 0.2);
+  }
+
+  // When model is loaded
+  &.has-model {
+    border: none;
+    padding: 0;
+    background: transparent;
+    min-height: 500px;
+  }
+}
+
+// Upload elements
+.upload-icon {
+  font-size: 4rem;
+  color: $text-secondary;
+  margin-bottom: 20px;
+  display: block;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+.drop-zone:hover .upload-icon {
+  color: $primary-color;
+  transform: scale(1.1);
+}
+
+.upload-text {
+  font-size: 1.3rem;
+  color: $text-secondary;
+  margin-bottom: 15px;
+  font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+}
+
+.upload-hint {
+  color: $text-hint;
+  font-size: 1rem;
+  margin-bottom: 25px;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+}
+
+// Browse button
+.browse-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  @include button-hover-effect;
+
+  @media (max-width: 768px) {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+}
+
+// Model viewer styles
+:host ::ng-deep model-viewer {
+  width: 100%;
+  height: 500px;
+  border-radius: $border-radius;
+  box-shadow: $shadow-medium;
+  background: linear-gradient(145deg, #f8fafc, #f1f5f9);
+
+  @media (max-width: 768px) {
+    height: 400px;
+  }
+}
+
+// Loading indicator
+.loading {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  color: $primary-color;
+  font-weight: 600;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.spinner {
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid $primary-color;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+// Model info
+.model-info {
+  background: white;
+  border-radius: $border-radius;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: $shadow-light;
+  display: none;
+
+  &.visible {
+    display: block;
+    @include fade-in-animation;
+  }
+
+  h3 {
+    color: $text-primary;
+    margin: 0 0 15px 0;
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: $text-secondary;
+    margin: 8px 0;
+    font-size: 0.95rem;
+  }
+}
+
+// Reset button
+.reset-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba($error-color, 0.9);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: none;
+  font-size: 0.9rem;
+
+  &.visible {
+    display: block;
+  }
+
+  &:hover {
+    background: $error-color;
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 480px) {
+  .container {
+    margin: 10px;
+    border-radius: $border-radius;
+  }
+
+  .header {
+    padding: 20px;
+  }
+
+  .viewer-container {
+    padding: 15px;
+  }
+
+  .drop-zone {
+    padding: 30px 15px;
+    min-height: 200px;
+  }
+}

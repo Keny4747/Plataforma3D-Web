@@ -1,0 +1,59 @@
+
+
+
+
+<div class="container">
+  <div class="header">
+    <h1>Visor 3D</h1>
+
+  </div>
+
+  <div class="viewer-container">
+    <!-- Drop Zone -->
+    <div
+      class="drop-zone"
+      [class.dragover]="isDragOver"
+      [class.has-model]="modelLoaded"
+      #dropZone
+      (click)="onDropZoneClick()">
+
+      <!-- Contenido inicial del drop zone -->
+      <ng-container *ngIf="!modelLoaded">
+
+        <div class="upload-text">Arrastra tu archivo GLB aquí</div>
+        <div class="upload-hint">o haz clic para seleccionar desde tu dispositivo</div>
+        <button
+          class="browse-btn"
+          type="button"
+          (click)="onBrowseClick()">
+          Seleccionar archivo
+        </button>
+      </ng-container>
+    </div>
+
+    <!-- Loading indicator -->
+    <div class="loading" [class.visible]="isLoading">
+      <div class="spinner"></div>
+      Cargando modelo 3D...
+    </div>
+
+    <!-- Reset button -->
+    <button
+      class="reset-btn"
+      [class.visible]="modelLoaded"
+      type="button"
+      (click)="resetViewer()">
+      ✕ Cambiar modelo
+    </button>
+
+
+
+    <!-- Hidden file input -->
+    <input
+      type="file"
+      #fileInput
+      class="file-input"
+      accept=".glb,.gltf"
+      style="display: none;">
+  </div>
+</div>
